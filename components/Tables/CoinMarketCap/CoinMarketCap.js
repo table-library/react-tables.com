@@ -223,7 +223,12 @@ const queryCurrencies =
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&${extra}order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
         )}`
       )
-      .then((result) => result.data);
+      .then((result) => result.data)
+      .catch((error) => {
+        console.log(error);
+        console.log('local API may not be running');
+        return [];
+      });
   };
 
 const queryMarkets = (id) => () =>
@@ -233,7 +238,12 @@ const queryMarkets = (id) => () =>
         process.env.NEXT_PUBLIC_BASE_URL
       }/?proxy=${`https://api.coingecko.com/api/v3/coins/${id}/tickers?per_page=5&page=1&include_exchange_logo=true`}`
     )
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((error) => {
+      console.log(error);
+      console.log('local API may not be running');
+      return [];
+    });
 
 const CoinsTable = () => {
   // dropdown
