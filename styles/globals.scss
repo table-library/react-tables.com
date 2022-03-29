@@ -1,0 +1,86 @@
+:root {
+  --theme-ui-colors-background: rgba(12,10,29,1.0);
+  --theme-ui-colors-text: rgba(255,255,255,0.88);
+  --theme-ui-colors-text-light: rgba(255,255,255,0.72);
+  --theme-ui-colors-primary: rgba(111,76,255,0.88);
+  --theme-ui-colors-primary-hover: rgba(111,76,255,1);
+  --theme-ui-colors-secondary: rgba(111, 76, 255, 0.08);
+  --theme-ui-colors-tertiary: rgba(255,255,255,0.08);
+  --theme-ui-colors-border: #202020;
+  --theme-ui-colors-warning: #FFA542;
+  --theme-ui-colors-error: #ED4A6D;
+  --theme-ui-colors-success: #4BCA81;
+
+  --theme-ui-shadows-box: 0 0 32px 0 rgb(88 47 213 / 32%), 0 0 8px 0 rgb(88 47 213 / 48%);
+  --theme-ui-shadows-text: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px rgb(65 120 255 / 24%);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 400;
+
+  background-color: var(--theme-ui-colors-background);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 6rem;
+  line-height: 1;
+  letter-spacing: -2px;
+
+  text-shadow: var(--theme-ui-shadows-text);
+  color: var(--theme-ui-colors-text);
+  margin-bottom: 3rem;
+  margin-top: 0rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 4rem;
+  letter-spacing: -1.6px;
+
+  text-shadow: var(--theme-ui-shadows-text);
+  color: var(--theme-ui-colors-text);
+  margin-bottom: 1.2rem;
+  margin-top: 0rem;
+}
+
+p {
+  font-size: 1.5rem;
+  line-height: 28px;
+  text-shadow: var(--theme-ui-shadows-text);
+  color: var(--theme-ui-colors-text);
+  margin-bottom: 2rem;
+  margin-top: 0rem;
+}
+
+button {
+  color: var(--theme-ui-colors-text);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  letter-spacing: 0.4px;
+}
+
+a {
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.react-live {
+  textarea:focus {
+    outline: none;
+  }
+}
+
+.token-line {
+  white-space: pre;
+}
