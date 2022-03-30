@@ -10,21 +10,26 @@
   display: flex;
 }
 
-.center {
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .content {
   padding: 8rem 2rem;
   z-index: 1;
   position: relative;
 
   display: flex;
+}
+
+.center {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+.split {
+  flex-direction: row;
 }
 
 .grid {
@@ -46,7 +51,6 @@
   }
 
   to {
-
     filter: drop-shadow(0rem -5rem 6rem rgba(27,41,72,0.5));
   }
 }
@@ -57,6 +61,8 @@
 
   border-radius: 50%;
   transform: rotate(220deg);
+}
 
+.planet[data-theme='dark'] {
   animation: glow 2s ease-in-out infinite alternate;
 }

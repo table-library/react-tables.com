@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import Select from '@mui/material/Select';
+import SelectBase from '@mui/material/Select';
 import CircularProgress from '@mui/material/CircularProgress';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -54,7 +54,7 @@ export const Loading = () => (
   </Relative>
 );
 
-export const StyledSelect = styled(Select)`
+export const Select = styled(SelectBase)`
   font-size: 12px;
 
   & .MuiSelect-select {
@@ -70,7 +70,13 @@ export const Indicator = ({ prefix = '', value, suffix = '' }) => {
   const isPositive = value > 0;
 
   return (
-    <AlignCenter style={{ color: isPositive ? '#31f531' : 'red' }}>
+    <AlignCenter
+      style={{
+        color: isPositive
+          ? 'var(--theme-ui-colors-success)'
+          : 'var(--theme-ui-colors-error)',
+      }}
+    >
       {prefix}
       {isPositive ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}&nbsp;
       <Ellipse>

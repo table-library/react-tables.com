@@ -6,10 +6,8 @@
   --theme-ui-colors-primary: rgba(111,76,255,0.88);
   --theme-ui-colors-primary-hover: rgba(111,76,255,1);
   --theme-ui-colors-secondary: rgba(111, 76, 255, 0.08);
-  --theme-ui-colors-tertiary: rgba(255,255,255,0.08);
-  --theme-ui-colors-header: #0c0a1de0;
+  --theme-ui-colors-header: rgba(12, 10, 29, 0.878);
   --theme-ui-colors-border: #202020;
-  --theme-ui-colors-warning: #FFA542;
   --theme-ui-colors-error: #ED4A6D;
   --theme-ui-colors-success: #4BCA81;
 
@@ -19,21 +17,19 @@
 
 [data-theme='light'] {
   --theme-ui-colors-background: rgb(250, 250, 250);
-  --theme-ui-colors-background-secondary: rgb(250, 250, 250); // we are using border shadow here, so it's the same as primary
+  --theme-ui-colors-background-secondary: rgb(245, 245, 245);
   --theme-ui-colors-text: rgba(0,0,0,0.88);
   --theme-ui-colors-text-light: rgba(0,0,0,0.72);
-  --theme-ui-colors-primary: rgba(111,76,255,0.88);
-  --theme-ui-colors-primary-hover: rgba(111,76,255,1);
-  --theme-ui-colors-secondary: rgba(111, 76, 255, 0.08);
-  --theme-ui-colors-tertiary: rgba(255,255,255,0.08);
-  --theme-ui-colors-border: #d4d4d4;
-  --theme-ui-colors-header: #f6f6f6;
-  --theme-ui-colors-warning: #FFA542;
-  --theme-ui-colors-error: #ED4A6D;
-  --theme-ui-colors-success: #4BCA81;
+  --theme-ui-colors-primary: rgba(8,61,119,0.88);
+  --theme-ui-colors-primary-hover: rgba(8,61,119,1);
+  --theme-ui-colors-secondary: rgb(160,54,27);
+  --theme-ui-colors-header: rgba(246,246,246,0.878);
+  --theme-ui-colors-border: #D4D4D4;
+  --theme-ui-colors-error: #A6465B;
+  --theme-ui-colors-success: #439867;
 
-  --theme-ui-shadows-box: 0 0 32px 0 rgb(88 47 213 / 32%), 0 0 8px 0 rgb(88 47 213 / 48%);
-  --theme-ui-shadows-text: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px rgb(65 120 255 / 24%);
+  --theme-ui-shadows-box: 0;
+  --theme-ui-shadows-text: 0;
 }
 
 html,
@@ -53,10 +49,13 @@ h1 {
   line-height: 1;
   letter-spacing: -2px;
 
-  text-shadow: var(--theme-ui-shadows-text);
   color: var(--theme-ui-colors-text);
   margin-bottom: 3rem;
   margin-top: 0rem;
+}
+
+h1[data-theme='dark'] {
+  text-shadow: var(--theme-ui-shadows-text);
 }
 
 h2 {
@@ -65,19 +64,25 @@ h2 {
   line-height: 4rem;
   letter-spacing: -1.6px;
 
-  text-shadow: var(--theme-ui-shadows-text);
   color: var(--theme-ui-colors-text);
   margin-bottom: 1.2rem;
   margin-top: 0rem;
 }
 
+h2[data-theme='dark'] {
+  text-shadow: var(--theme-ui-shadows-text);
+}
+
 p {
   font-size: 1.5rem;
   line-height: 28px;
-  text-shadow: var(--theme-ui-shadows-text);
   color: var(--theme-ui-colors-text);
   margin-bottom: 2rem;
   margin-top: 0rem;
+}
+
+p[data-theme='dark'] {
+  text-shadow: var(--theme-ui-shadows-text);
 }
 
 button {
@@ -88,8 +93,15 @@ button {
   letter-spacing: 0.4px;
 }
 
+ul, li {
+  text-decoration: none;
+}
+
 a {
-  color: inherit;
+  color: var(--theme-ui-colors-text-light);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
 }
 
 * {

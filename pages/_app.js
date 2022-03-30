@@ -52,7 +52,7 @@ const MyApp = ({
           content="initial-scale=1, width=device-width"
         />
       </Head>
-      <DarkModeProvider defaultTheme="dark">
+      <DarkModeProvider>
         <MaterialTheme>
           <Component {...pageProps} />
         </MaterialTheme>

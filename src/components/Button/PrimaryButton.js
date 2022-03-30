@@ -5,6 +5,7 @@ const PrimaryButton = ({ children, ...props }) => {
     <button className={styles.button} {...props}>
       <div className={styles.content}>{children}</div>
       <div className={styles.background} />
+      <div className={styles.stencil} />
     </button>
   );
 };

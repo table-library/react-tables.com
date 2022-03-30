@@ -11,6 +11,8 @@ const useDarkMode = () => {
   };
 };
 
-const DarkModeProvider = ThemeProvider;
+const DarkModeProvider = ({ children }) => (
+  <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>
+);
 
 export { useDarkMode, DarkModeProvider };

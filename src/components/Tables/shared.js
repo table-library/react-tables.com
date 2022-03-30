@@ -5,6 +5,10 @@ const ThemeEscape = styled.div`
   p {
     margin: 0;
   }
+
+  .MuiTablePagination-root {
+    border-bottom: 1px solid var(--theme-ui-colors-border);
+  }
 `;
 
 export const TableThemeProvider = ({ theme, children }) => {

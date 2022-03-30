@@ -7,35 +7,72 @@
 
   position: relative;
 
-  &:hover .background {
+  .content {
+    padding: 1rem 2rem;
+    pointer-events: none;
+    z-index: 2;
+    position: relative;
+
+    color: #ffffff;
+  }
+
+  .background, .stencil {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 4px;
+
+    transition: all .2s ease-in-out;
+  }
+
+  &:hover .background, &:hover .stencil {
     transform: scale(1.1);
-    background: var(--theme-ui-colors-primary-hover);
-    box-shadow: var(--theme-ui-shadows-box);
-  }
-
-  &:hover .content {
-    text-shadow: var(--theme-ui-shadows-text);;
   }
 }
 
-.content {
-  padding: 1rem 2rem;
-  pointer-events: none;
-  z-index: 2;
-  position: relative;
+[data-theme='dark'] {
+  .button {
+    &:hover .content {
+      text-shadow: var(--theme-ui-shadows-text);;
+    }
 
-  color: #ffffff;
+    .background {
+      background: var(--theme-ui-colors-primary);
+    }
+
+    &:hover .background {
+      background: var(--theme-ui-colors-primary-hover);
+      box-shadow: var(--theme-ui-shadows-box);
+    }
+  }
 }
 
-.background {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
+[data-theme='light'] {
+  .button {
+    &:hover .content {
+      text-shadow: var(--theme-ui-shadows-text);;
+    }
 
-  border-radius: 4px;
-  background: var(--theme-ui-colors-primary);
+    .background {
+      background: var(--theme-ui-colors-primary);
+    }
 
-  transition: all .2s ease-in-out;
+    .stencil {
+      background: var(--theme-ui-colors-secondary);
+      clip-path: polygon(0 0, 100% 0, 100% 70%);
+    }
+  }
 }
+
+// .button[data-theme='dark'] {
+//   background: #083d77;
+//   // ee964b
+// }
+
+// .button[data-theme='light'] {
+//   background: #083d77;
+//   // ee964b
+// }

@@ -5,7 +5,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-import axios from 'axios';
 import useLocalStorageState from 'use-local-storage-state';
 import TablePagination from '@mui/material/TablePagination';
 import Chip from '@mui/material/Chip';
@@ -24,6 +23,8 @@ import PieChartIcon from '@mui/icons-material/PieChart';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CloseIcon from '@mui/icons-material/Close';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
+
+import { useDarkMode } from 'hooks/useDarkMode';
 
 import {
   Table,
@@ -52,23 +53,50 @@ import {
   CUSTOM_PRIMARY_THEME,
   CUSTOM_SECONDARY_THEME,
 } from './theme';
-import {
-  BlurryOverlay,
-  OverlayLoading,
-  Relative,
-  Loading,
-  StyledSelect,
-  Indicator,
-} from './styles';
+import { queryCurrencies, queryMarkets } from './queries';
+import { twoDecimals } from './util';
+import { OverlayLoading, Loading, Select, Indicator } from './styles';
 
 const queryClient = new QueryClient();
 
-const twoDecimals = (integer) =>
-  Number((Math.round(integer * 100) / 100).toFixed(2));
+const ViewMarket = ({
+  marketData,
+  item,
+  isExpanded,
+  onOpen,
+  onClose,
+}) => {
+  if (!marketData && isExpanded) {
+    return (
+      <IconButton disabled size="small">
+        <CircularProgress size={20} />
+      </IconButton>
+    );
+  }
+
+  if (isExpanded) {
+    return (
+      <IconButton size="small" onClick={() => onClose(item.id)}>
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    );
+  }
+
+  return (
+    <IconButton
+      size="small"
+      onClick={(event) => onOpen(event, item.id)}
+    >
+      <MoreVertIcon fontSize="small" />
+    </IconButton>
+  );
+};
 
 const MarketsTable = ({ data, customColumnsActive }) => {
+  const { isLightMode } = useDarkMode();
+
   const theme = useTheme([
-    CUSTOM_SHARED_THEME,
+    CUSTOM_SHARED_THEME({ isLightMode }),
     CUSTOM_SECONDARY_THEME,
   ]);
 
@@ -129,7 +157,9 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                       &nbsp;
                       <Chip
                         label="Buy"
-                        style={{ color: '#31f531' }}
+                        style={{
+                          color: 'var(--theme-ui-colors-success)',
+                        }}
                         variant="outlined"
                         size="small"
                         clickable
@@ -153,8 +183,8 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                       style={{
                         color:
                           item.trust_score === 'green'
-                            ? '#31f531'
-                            : 'red',
+                            ? 'var(--theme-ui-colors-success)'
+                            : 'var(--theme-ui-colors-error)',
                       }}
                       variant="outlined"
                     />
@@ -176,76 +206,23 @@ const MarketsTable = ({ data, customColumnsActive }) => {
   );
 };
 
-const ViewMarket = ({
-  marketData,
-  item,
-  isExpanded,
-  onOpen,
-  onClose,
-}) => {
-  if (!marketData && isExpanded) {
-    return (
-      <IconButton disabled size="small">
-        <CircularProgress size={20} />
-      </IconButton>
-    );
-  }
-
-  if (isExpanded) {
-    return (
-      <IconButton size="small" onClick={() => onClose(item.id)}>
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    );
-  }
-
-  return (
-    <IconButton
-      size="small"
-      onClick={(event) => onOpen(event, item.id)}
-    >
-      <MoreVertIcon fontSize="small" />
-    </IconButton>
-  );
-};
-
-const queryCurrencies =
-  ({ page, size, category }) =>
-  () => {
-    let extra = '';
-    if (category !== DEFAULT_CATEGORY) {
-      extra = `category=${category}&`;
-    }
-
-    return axios
-      .get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/?proxy=${btoa(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&${extra}order=market_cap_desc&per_page=${size}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
-        )}`
-      )
-      .then((result) => result.data)
-      .catch((error) => {
-        console.log(error);
-        console.log('local API may not be running');
-        return [];
-      });
-  };
-
-const queryMarkets = (id) => () =>
-  axios
-    .get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/?proxy=${btoa(
-        `https://api.coingecko.com/api/v3/coins/${id}/tickers?per_page=5&page=1&include_exchange_logo=true`
-      )}`
-    )
-    .then((res) => res.data)
-    .catch((error) => {
-      console.log(error);
-      console.log('local API may not be running');
-      return [];
-    });
-
 const CoinsTable = () => {
+  const { isLightMode } = useDarkMode();
+
+  // box shadow hack for theme transition
+  const [isLightModeFinished, setLightModeFinished] =
+    React.useState(isLightMode);
+
+  React.useEffect(() => {
+    if (!isLightMode) {
+      setLightModeFinished(false);
+    } else {
+      setTimeout(() => {
+        setLightModeFinished(true);
+      }, 0);
+    }
+  }, [isLightMode]);
+
   // dropdown
 
   const [isDropdownOpen, setDropdownOpen] = React.useState(null);
@@ -301,7 +278,10 @@ const CoinsTable = () => {
 
   // theming
 
-  const theme = useTheme([CUSTOM_SHARED_THEME, CUSTOM_PRIMARY_THEME]);
+  const theme = useTheme([
+    CUSTOM_SHARED_THEME({ isLightMode, isLightModeFinished }),
+    CUSTOM_PRIMARY_THEME,
+  ]);
 
   // data
 
@@ -548,7 +528,7 @@ const CoinsTable = () => {
                   </HeaderCell>
                   <HeaderCell resize>Price</HeaderCell>
                   <HeaderCell resize>
-                    <StyledSelect
+                    <Select
                       value={percentageUnitOne}
                       onChange={(event) =>
                         setPercentageUnitOne(event.target.value)
@@ -561,10 +541,10 @@ const CoinsTable = () => {
                           </MenuItem>
                         )
                       )}
-                    </StyledSelect>
+                    </Select>
                   </HeaderCell>
                   <HeaderCell resize>
-                    <StyledSelect
+                    <Select
                       value={percentageUnitTwo}
                       onChange={(event) =>
                         setPercentageUnitTwo(event.target.value)
@@ -577,7 +557,7 @@ const CoinsTable = () => {
                           </MenuItem>
                         )
                       )}
-                    </StyledSelect>
+                    </Select>
                   </HeaderCell>
                   <HeaderCell resize>Market Cap</HeaderCell>
                   <HeaderCell resize>Circulating Supply</HeaderCell>
@@ -702,7 +682,7 @@ const CoinsTable = () => {
                             data={item.sparkline_in_7d.price}
                             height={40}
                           >
-                            <SparklinesLine color="#31f531" />
+                            <SparklinesLine color="var(--theme-ui-colors-success)" />
                           </Sparklines>
                         </Cell>
                         {customColumnsActive.map((column) => (

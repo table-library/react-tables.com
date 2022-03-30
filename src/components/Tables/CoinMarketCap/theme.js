@@ -1,4 +1,7 @@
-export const CUSTOM_SHARED_THEME = {
+export const CUSTOM_SHARED_THEME = ({
+  isLightMode,
+  isLightModeFinished,
+}) => ({
   BaseRow: `
     height: 54px;
 
@@ -58,7 +61,16 @@ export const CUSTOM_SHARED_THEME = {
     }
 
     &:nth-of-type(3) {
-      border-right: 1px solid var(--theme-ui-colors-border);
+      ${
+        isLightMode
+          ? ''
+          : 'border-right: 1px solid var(--theme-ui-colors-border);'
+      }
+      ${
+        isLightModeFinished
+          ? 'box-shadow: 5px 0 5px -2px #dadada;'
+          : ''
+      }
     }
 
     &.small {
@@ -72,13 +84,30 @@ export const CUSTOM_SHARED_THEME = {
       min-width: 80px;
       width: 80px;
 
-      border-left: 1px solid var(--theme-ui-colors-border);
+      ${
+        isLightMode
+          ? ''
+          : 'border-left: 1px solid var(--theme-ui-colors-border);'
+      }
+      ${
+        isLightModeFinished
+          ? 'box-shadow: -5px 0 5px -2px #dadada;'
+          : ''
+      }
 
       display: flex;
       justify-content: center;
     }
+
+    & .MuiLinearProgress-colorPrimary {
+      background-color: var(--theme-ui-colors-error);
+    }
+
+    & .MuiLinearProgress-barColorPrimary {
+      background-color: var(--theme-ui-colors-success);
+    }
   `,
-};
+});
 
 export const CUSTOM_PRIMARY_THEME = {};
 

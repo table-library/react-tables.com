@@ -15,6 +15,7 @@ const planetTwo =
 
 const LandingSection = ({ children }) => (
   <Section
+    // split
     grid
     planets={[
       {
@@ -35,17 +36,18 @@ const LandingSection = ({ children }) => (
       },
     ]}
   >
-    {children}
-
-    <PrimaryButton
-      onClick={() =>
-        window
-          .open('https://react-table-library.com/', '_blank')
-          .focus()
-      }
-    >
-      Learn More
-    </PrimaryButton>
+    <div>{children}</div>
+    <div>
+      <PrimaryButton
+        onClick={() =>
+          window
+            .open('https://react-table-library.com/', '_blank')
+            .focus()
+        }
+      >
+        Learn More
+      </PrimaryButton>
+    </div>
   </Section>
 );
 

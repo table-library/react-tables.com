@@ -1,48 +1,14 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import { useDarkMode } from 'hooks/useDarkMode';
+import { useScrollDirection } from 'hooks/useScrollDirection';
 
 import styles from './Header.module.scss';
-
-const useScrollDirection = () => {
-  const [scrollDirection, setScrollDirection] = React.useState('up');
-
-  React.useEffect(() => {
-    const threshold = 0;
-    let lastScrollY = window.pageYOffset;
-    let ticking = false;
-
-    const updateScrollDirection = () => {
-      const scrollY = window.pageYOffset;
-
-      if (Math.abs(scrollY - lastScrollY) < threshold) {
-        ticking = false;
-        return;
-      }
-
-      setScrollDirection(scrollY > lastScrollY ? 'down' : 'up');
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScrollDirection);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollDirection]);
-
-  return scrollDirection;
-};
 
 const Header = () => {
   const { isDarkMode, setTheme } = useDarkMode();
@@ -52,18 +18,43 @@ const Header = () => {
     <header className={clsx(styles.header, styles[scrollDirection])}>
       <div>
         <h3>React Tables</h3>
-        <div>
-          <IconButton
-            size="small"
-            onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
-          >
-            {isDarkMode ? (
-              <LightModeIcon fontSize="small" />
-            ) : (
-              <DarkModeIcon fontSize="small" />
-            )}
-          </IconButton>
-        </div>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.robinwieruch.de/categories/react-table-library/"
+        >
+          Blog
+        </a>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://react-table-library.com/"
+        >
+          Docs
+        </a>
+      </div>
+      <div>
+        <IconButton
+          size="small"
+          onClick={() =>
+            window.open(
+              'https://github.com/table-library/react-table-library',
+              '_newtab'
+            )
+          }
+        >
+          <GitHubIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          size="small"
+          onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
+        >
+          {isDarkMode ? (
+            <LightModeIcon fontSize="small" />
+          ) : (
+            <DarkModeIcon fontSize="small" />
+          )}
+        </IconButton>
       </div>
     </header>
   );
