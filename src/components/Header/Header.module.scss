@@ -1,0 +1,26 @@
+.header {
+  z-index: 100;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  transform: translateY(0%);
+  opacity: 1;
+  background-color: var(--theme-ui-colors-header);
+  backdrop-filter: blur(1rem);
+  border-bottom: 1px solid var(--theme-ui-colors-border);
+
+  transition: all 0.5s;
+
+  &.down {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  & > div {
+    padding: 0rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

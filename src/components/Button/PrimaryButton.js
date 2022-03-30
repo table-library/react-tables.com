@@ -1,6 +1,6 @@
-import styles from './Button.module.scss';
+import styles from './PrimaryButton.module.scss';
 
-const Button = ({ children, ...props }) => {
+const PrimaryButton = ({ children, ...props }) => {
   return (
     <button className={styles.button} {...props}>
       <div className={styles.content}>{children}</div>
@@ -9,4 +9,4 @@ const Button = ({ children, ...props }) => {
   );
 };
 
-export { Button };
+export { PrimaryButton };

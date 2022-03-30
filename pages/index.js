@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { useTheme as useDarkLightTheme } from 'next-themes';
 
-import { Button } from '../src/components/Button';
+import { Header } from '../src/components/Header';
 import { Section } from '../src/components/Section';
+import { PrimaryButton } from '../src/components/Button';
 
 import * as TABLES from '../src/components/Tables';
 import { Features } from '../src/components/Features';
@@ -37,7 +37,7 @@ const LandingSection = ({ children }) => (
   >
     {children}
 
-    <Button
+    <PrimaryButton
       onClick={() =>
         window
           .open('https://react-table-library.com/', '_blank')
@@ -45,13 +45,11 @@ const LandingSection = ({ children }) => (
       }
     >
       Learn More
-    </Button>
+    </PrimaryButton>
   </Section>
 );
 
 export default function Home() {
-  const { theme, setTheme } = useDarkLightTheme();
-
   return (
     <div>
       <Head>
@@ -62,19 +60,11 @@ export default function Home() {
         />
       </Head>
 
-      <header></header>
+      <Header />
 
       <main>
         <LandingSection>
           <h1>Awesome React Tables</h1>
-
-          <Button
-            onClick={() =>
-              setTheme(theme === 'dark' ? 'light' : 'dark')
-            }
-          >
-            {theme} Mode
-          </Button>
         </LandingSection>
 
         <Section>
