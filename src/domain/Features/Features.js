@@ -38,6 +38,7 @@ import {
   Cell,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
+
 import { nodes } from '../data';
 import { THEME } from '../theme';
 

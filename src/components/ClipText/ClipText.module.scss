@@ -1,0 +1,32 @@
+.clip {
+  display: inline-block;
+
+  position: relative;
+
+  div:first-of-type {
+    position: absolute;
+  }
+
+  div:last-of-type {
+    position: relative;
+  }
+}
+
+.breakline {
+  display: block;
+}
+
+[data-theme='light'] {
+  .clip {
+    position: relative;
+
+    div:first-of-type {
+      color: var(--theme-ui-colors-primary);
+    }
+
+    div:last-of-type {
+      color: var(--theme-ui-colors-secondary);
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+  }
+}

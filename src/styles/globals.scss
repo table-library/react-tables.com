@@ -13,6 +13,9 @@
 
   --theme-ui-shadows-box: 0 0 32px 0 rgb(88 47 213 / 32%), 0 0 8px 0 rgb(88 47 213 / 48%);
   --theme-ui-shadows-text: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px rgb(65 120 255 / 24%);
+
+  --theme-ui-size-h1: 6rem;
+  --theme-ui-size-h2: 4rem;
 }
 
 [data-theme='light'] {
@@ -30,6 +33,9 @@
 
   --theme-ui-shadows-box: 0;
   --theme-ui-shadows-text: 0;
+
+  --theme-ui-size-h1: 6rem;
+  --theme-ui-size-h2: 6rem;
 }
 
 html,
@@ -43,9 +49,13 @@ body {
   background-color: var(--theme-ui-colors-background);
 }
 
+h1 span, h2 span, h3 span, h4 span, h5 span, h6 span, p {
+  display: block;
+}
+
 h1 {
   font-weight: 700;
-  font-size: 6rem;
+  font-size: var(--theme-ui-size-h1);
   line-height: 1;
   letter-spacing: -2px;
 
@@ -54,12 +64,15 @@ h1 {
   margin-top: 0rem;
 }
 
-h1[data-theme='dark'] {
-  text-shadow: var(--theme-ui-shadows-text);
+[data-theme='dark'] {
+  h1 {
+    text-shadow: var(--theme-ui-shadows-text);
+  }
 }
 
 h2 {
   font-weight: 700;
+  font-size: var(--theme-ui-size-h2);
   font-size: 4rem;
   line-height: 4rem;
   letter-spacing: -1.6px;
@@ -69,20 +82,23 @@ h2 {
   margin-top: 0rem;
 }
 
-h2[data-theme='dark'] {
-  text-shadow: var(--theme-ui-shadows-text);
+[data-theme='dark'] {
+  h2 {
+    text-shadow: var(--theme-ui-shadows-text);
+  }
 }
 
 p {
   font-size: 1.5rem;
-  line-height: 28px;
   color: var(--theme-ui-colors-text);
-  margin-bottom: 2rem;
   margin-top: 0rem;
+  margin-bottom: 0.5rem;
 }
 
-p[data-theme='dark'] {
-  text-shadow: var(--theme-ui-shadows-text);
+[data-theme='dark'] {
+  p {
+    text-shadow: var(--theme-ui-shadows-text);
+  }
 }
 
 button {
@@ -94,7 +110,9 @@ button {
 }
 
 ul, li {
-  text-decoration: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {

@@ -57,22 +57,12 @@
     }
 
     .background {
-      background: var(--theme-ui-colors-primary);
+      background: var(--theme-ui-colors-secondary);
     }
 
     .stencil {
-      background: var(--theme-ui-colors-secondary);
+      background: var(--theme-ui-colors-primary);
       clip-path: polygon(0 0, 100% 0, 100% 70%);
     }
   }
 }
-
-// .button[data-theme='dark'] {
-//   background: #083d77;
-//   // ee964b
-// }
-
-// .button[data-theme='light'] {
-//   background: #083d77;
-//   // ee964b
-// }

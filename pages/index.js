@@ -2,54 +2,13 @@ import Head from 'next/head';
 
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { PrimaryButton } from 'components/Button';
+import { ClipText } from 'components/ClipText';
+import { planetOne, planetTwo } from 'components/Planets';
 
-import * as TABLES from 'components/Tables';
-import { Features } from 'components/Features';
-import { Themes } from 'components/Themes';
-
-const planetOne =
-  'linear-gradient(to bottom, rgba(27,41,72,1) 0%,rgba(31,49,79,1) 0%,rgba(20,25,52,1) 10%,rgba(15,14,39,1) 21%,rgba(11,9,29,1) 52%,rgba(13,12,32,1) 100%)';
-const planetTwo =
-  'linear-gradient(to bottom, rgba(48,34,111,1) 0%,rgba(35,25,80,1) 5%,rgba(27,19,62,1) 8%,rgba(20,16,48,1) 13%,rgba(17,13,40,1) 17%,rgba(12,9,29,1) 51%,rgba(12,10,30,1) 78%,rgba(16,12,36,1) 100%)';
-
-const LandingSection = ({ children }) => (
-  <Section
-    // split
-    grid
-    planets={[
-      {
-        height: 1200,
-        width: 1200,
-        left: '55%',
-        bottom: '5%',
-        opacity: '30%',
-        background: planetOne,
-      },
-      {
-        height: 600,
-        width: 600,
-        left: '5%',
-        top: '5%',
-        opacity: '50%',
-        background: planetTwo,
-      },
-    ]}
-  >
-    <div>{children}</div>
-    <div>
-      <PrimaryButton
-        onClick={() =>
-          window
-            .open('https://react-table-library.com/', '_blank')
-            .focus()
-        }
-      >
-        Learn More
-      </PrimaryButton>
-    </div>
-  </Section>
-);
+import * as TABLES from 'domain/Tables';
+import { Features } from 'domain/Features';
+import { Themes } from 'domain/Themes';
+import { LandingSection, OutlineSection } from 'domain/Sections';
 
 export default function Home() {
   return (
@@ -65,9 +24,7 @@ export default function Home() {
       <Header />
 
       <main>
-        <LandingSection>
-          <h1>Awesome React Tables</h1>
-        </LandingSection>
+        <LandingSection />
 
         <Section>
           <h2>CoinMarketCap</h2>
@@ -149,9 +106,7 @@ export default function Home() {
           <Themes />
         </Section>
 
-        <LandingSection>
-          <h2>Presented by React Table Library</h2>
-        </LandingSection>
+        <OutlineSection />
       </main>
 
       <footer></footer>
