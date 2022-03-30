@@ -2,7 +2,6 @@ import Head from 'next/head';
 
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
-import { ClipText } from 'components/ClipText';
 import { planetOne, planetTwo } from 'components/Planets';
 
 import * as TABLES from 'domain/Tables';
@@ -14,7 +13,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>React Table Library</title>
+        <title>React Tables</title>
         <meta
           name="description"
           content="Awesome React Tables by React Table Library"
