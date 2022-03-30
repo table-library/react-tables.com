@@ -1,5 +1,3 @@
-import Head from 'next/head';
-
 import { Header } from 'components/Header';
 import { Section } from 'components/Section';
 import { planetOne, planetTwo } from 'components/Planets';
@@ -12,14 +10,6 @@ import { LandingSection, OutlineSection } from 'domain/Sections';
 export default function Home() {
   return (
     <div>
-      <Head>
-        <title>React Tables</title>
-        <meta
-          name="description"
-          content="Awesome React Tables by React Table Library"
-        />
-      </Head>
-
       <Header />
 
       <main>
