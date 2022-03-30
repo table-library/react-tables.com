@@ -25,7 +25,7 @@ export const BlurryOverlay = styled.div`
   top: 0;
   left: 0;
 
-  background: #0d0a1d;
+  background: var(--theme-ui-colors-background);
   filter: opacity(0.8);
 
   z-index: 10;

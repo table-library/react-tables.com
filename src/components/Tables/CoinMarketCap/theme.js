@@ -3,22 +3,22 @@ export const CUSTOM_SHARED_THEME = {
     height: 54px;
 
     font-size: 14px;
-    color: #ffffff;
+    color: var(--theme-ui-colors-text);
 
     &:hover {
-      color: #f8fafd;
+      color: var(--theme-ui-colors-text);
     }
   `,
   HeaderRow: `
     font-size: 12px;
 
     border-top: none;
-    border-bottom: 1px solid #515151;
+    border-bottom: 1px solid var(--theme-ui-colors-border);
   `,
   Row: `
     font-size: 14px;
 
-    border-bottom: 1px solid #515151;
+    border-bottom: 1px solid var(--theme-ui-colors-border);
   `,
   BaseCell: `
     padding-top: 16px 16px;
@@ -51,14 +51,14 @@ export const CUSTOM_SHARED_THEME = {
       width: 240px;
     }
 
-    background-color: #1d1229;
+    background-color: var(--theme-ui-colors-background-secondary);
 
     &:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3), &:last-of-type {
-      background-color: #0d0a1d;
+      background-color: var(--theme-ui-colors-background);
     }
 
     &:nth-of-type(3) {
-      border-right: 1px solid #515151;
+      border-right: 1px solid var(--theme-ui-colors-border);
     }
 
     &.small {
@@ -72,12 +72,10 @@ export const CUSTOM_SHARED_THEME = {
       min-width: 80px;
       width: 80px;
 
-      border-left: 1px solid #515151;
+      border-left: 1px solid var(--theme-ui-colors-border);
 
-      & > div {
-        display: flex;
-        justify-content: center;
-      }
+      display: flex;
+      justify-content: center;
     }
   `,
 };
@@ -89,6 +87,6 @@ export const CUSTOM_SECONDARY_THEME = {
     overflow: inherit;
   `,
   BaseRow: `
-    background-color: #0d0a1d;
+    background-color: var(--theme-ui-colors-background);
   `,
 };

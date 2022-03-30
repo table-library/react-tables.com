@@ -1,5 +1,5 @@
+import * as React from 'react';
 import styled from '@emotion/styled';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const ThemeEscape = styled.div`
   p {
@@ -7,17 +7,9 @@ const ThemeEscape = styled.div`
   }
 `;
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
-
-export const TableThemeProvider = ({ children }) => (
-  <ThemeEscape>
-    <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
-  </ThemeEscape>
-);
+export const TableThemeProvider = ({ theme, children }) => {
+  return <ThemeEscape>{children}</ThemeEscape>;
+};
 
 export const AlignCenter = ({
   children,

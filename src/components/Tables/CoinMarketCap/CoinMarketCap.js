@@ -234,9 +234,9 @@ const queryCurrencies =
 const queryMarkets = (id) => () =>
   axios
     .get(
-      `${
-        process.env.NEXT_PUBLIC_BASE_URL
-      }/?proxy=${`https://api.coingecko.com/api/v3/coins/${id}/tickers?per_page=5&page=1&include_exchange_logo=true`}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/?proxy=${btoa(
+        `https://api.coingecko.com/api/v3/coins/${id}/tickers?per_page=5&page=1&include_exchange_logo=true`
+      )}`
     )
     .then((res) => res.data)
     .catch((error) => {
@@ -423,7 +423,9 @@ const CoinsTable = () => {
       <Stack
         direction="row"
         justifyContent="space-between"
-        style={{ borderBottom: '1px solid #515151' }}
+        style={{
+          borderBottom: '1px solid var(--theme-ui-colors-border)',
+        }}
       >
         <Stack direction="row" spacing={1} m={1}>
           <Button
@@ -472,7 +474,9 @@ const CoinsTable = () => {
         <Stack
           direction="row"
           justifyContent="space-between"
-          style={{ borderBottom: '1px solid #515151' }}
+          style={{
+            borderBottom: '1px solid var(--theme-ui-colors-border)',
+          }}
         >
           <Stack
             direction="row"
@@ -480,9 +484,7 @@ const CoinsTable = () => {
             spacing={1}
             m={1}
           >
-            <small
-              style={{ color: '#ce93d8', textTransform: 'uppercase' }}
-            >
+            <small style={{ textTransform: 'uppercase' }}>
               Add Columns:
             </small>
 
@@ -599,7 +601,7 @@ const CoinsTable = () => {
                       </AlignCenter>
                     </HeaderCell>
                   ))}
-                  <HeaderCell pinRight />
+                  <HeaderCell pinRight stiff />
                 </HeaderRow>
               </Header>
 
@@ -708,7 +710,7 @@ const CoinsTable = () => {
                             {CUSTOM_COLUMNS[column].render(item)}
                           </Cell>
                         ))}
-                        <Cell pinRight>
+                        <Cell pinRight stiff>
                           <ViewMarket
                             marketData={marketData}
                             item={item}

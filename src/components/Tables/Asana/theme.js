@@ -1,23 +1,23 @@
 export const SHARED_THEME = {
   HeaderRow: `
     font-size: 12px;
-    color: #dcdcdc;
+    color: var(--theme-ui-colors-text);
 
-    border-top: 1px solid #515151;
-    border-bottom: 1px solid #515151;
+    border-top: 1px solid var(--theme-ui-colors-border);
+    border-bottom: 1px solid var(--theme-ui-colors-border);
   `,
   Row: `
     font-size: 14px;
-    color: #ffffff;
+    color: var(--theme-ui-colors-text);
 
-    border-bottom: 1px solid #515151;
+    border-bottom: 1px solid var(--theme-ui-colors-border);
 
     &.first {
-      border-top: 1px solid #515151;
+      border-top: 1px solid var(--theme-ui-colors-border);
     }
 
     &:hover {
-      color: #ffffff;
+      color: var(--theme-ui-colors-text);
     }
   `,
   BaseCell: `
@@ -39,11 +39,11 @@ export const SHARED_THEME = {
 
 export const PRIMARY_THEME = {
   BaseRow: `
-    background-color: #0d0a1d;
+    background-color: var(--theme-ui-colors-background);
   `,
   BaseCell: `
     border-bottom: 1px solid transparent;
-    border-right: 1px solid #515151;
+    border-right: 1px solid var(--theme-ui-colors-border);
 
     &:first-of-type {
       padding-left: 24px;
@@ -61,7 +61,7 @@ export const PRIMARY_THEME = {
 
 export const SECONDARY_THEME = {
   BaseRow: `
-    background-color: #1d1229;
+    background-color: var(--theme-ui-colors-background-secondary);
   `,
   BaseCell: `
     border-bottom: 1px solid transparent;
