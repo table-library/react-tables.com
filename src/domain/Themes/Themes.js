@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import styles from '../Features/Features.module.scss';
+import { Grid, GridItem } from 'components/Grid';
 
 const Themes = () => {
   return (
-    <div className={styles.grid} style={{ maxWidth: '450px' }}>
-      <div className={styles.gridItem}>
+    <Grid width="450px">
+      <GridItem>
         <Image
           alt="material"
           src="/themes/material.png"
@@ -14,8 +14,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Material UI</span>
-      </div>
-      <div className={styles.gridItem}>
+      </GridItem>
+      <GridItem>
         <Image
           alt="chakra"
           src="/themes/chakra.png"
@@ -24,8 +24,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Chakra UI</span>
-      </div>
-      <div className={styles.gridItem}>
+      </GridItem>
+      <GridItem>
         <Image
           alt="mantine"
           src="/themes/mantine.png"
@@ -34,8 +34,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Mantine</span>
-      </div>
-      <div className={styles.gridItem}>
+      </GridItem>
+      <GridItem>
         <Image
           alt="ant design"
           src="/themes/antdesign.png"
@@ -44,8 +44,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Ant Design</span>
-      </div>
-      <div className={styles.gridItem}>
+      </GridItem>
+      <GridItem>
         <Image
           alt="bootstrap"
           src="/themes/bootstrap.png"
@@ -54,8 +54,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Bootstrap</span>
-      </div>
-      <div className={styles.gridItem}>
+      </GridItem>
+      <GridItem>
         <Image
           alt="semantic"
           src="/themes/semantic.png"
@@ -64,8 +64,8 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Semantic UI</span>
-      </div>
-    </div>
+      </GridItem>
+    </Grid>
   );
 };
 

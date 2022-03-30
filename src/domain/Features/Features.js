@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import HeightIcon from '@mui/icons-material/Height';
@@ -39,10 +38,10 @@ import {
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 
+import { Grid, GridItem } from 'components/Grid';
+
 import { nodes } from '../data';
 import { THEME } from '../theme';
-
-import styles from './Features.module.scss';
 
 const code = `
 () => {
@@ -91,84 +90,84 @@ const code = `
 const Features = () => {
   return (
     <>
-      <div className={styles.grid} style={{ maxWidth: '900px' }}>
-        <div className={styles.gridItem}>
+      <Grid width="900px">
+        <GridItem>
           <DarkModeIcon />
           Theming
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <TableChartIcon />
           Layout
-        </div>
-        <div className={clsx(styles.gridItem, styles.rotate)}>
+        </GridItem>
+        <GridItem rotate>
           <HeightIcon />
           Resize
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <SortByAlphaIcon />
           Sort
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <SearchIcon />
           Search
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <FilterAltIcon />
           Filter
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <CheckBoxIcon />
           Select
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <AccountTreeIcon />
           Tree
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <ExpandIcon />
           Expand
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <AutoStoriesIcon />
           Pagination
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <GpsFixedIcon />
           Fixed Header
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <ViewColumnIcon />
           Fixed Column
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <BoltIcon />
           Virtualized
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <EditIcon />
           Editable
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <DashboardCustomizeIcon />
           Column Hiding
-        </div>
-        <div className={clsx(styles.gridItem, styles.rotate)}>
+        </GridItem>
+        <GridItem rotate>
           <MoveDownIcon />
           Column Ordering
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <BackupTableIcon />
           CSV Download
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <PictureAsPdfIcon />
           PDF Download
-        </div>
-        <div className={styles.gridItem}>
+        </GridItem>
+        <GridItem>
           <ImageIcon />
           Image Download
-        </div>
-      </div>
+        </GridItem>
+      </Grid>
 
       {/* <div className="react-live" style={{ display: 'flex' }}>
         <LiveProvider
