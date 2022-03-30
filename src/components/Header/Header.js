@@ -1,6 +1,10 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { useTheme as useDarkLightTheme } from 'next-themes';
+import IconButton from '@mui/material/IconButton';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+
+import { useDarkMode } from 'hooks/useDarkMode';
 
 import styles from './Header.module.scss';
 
@@ -41,7 +45,7 @@ const useScrollDirection = () => {
 };
 
 const Header = () => {
-  const { theme, setTheme } = useDarkLightTheme();
+  const { isDarkMode, setTheme } = useDarkMode();
   const scrollDirection = useScrollDirection();
 
   return (
@@ -49,13 +53,16 @@ const Header = () => {
       <div>
         <h3>React Tables</h3>
         <div>
-          <button
-            onClick={() =>
-              setTheme(theme === 'dark' ? 'light' : 'dark')
-            }
+          <IconButton
+            size="small"
+            onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
           >
-            {theme} Mode
-          </button>
+            {isDarkMode ? (
+              <LightModeIcon fontSize="small" />
+            ) : (
+              <DarkModeIcon fontSize="small" />
+            )}
+          </IconButton>
         </div>
       </div>
     </header>

@@ -6,14 +6,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import { createTheme } from '@mui/material/styles';
-import {
-  ThemeProvider as DarkLightThemes,
-  useTheme as useDarkLightTheme,
-} from 'next-themes';
 
-import '../styles/globals.scss';
+import { createEmotionCache } from 'util/emotion';
+import { useDarkMode, DarkModeProvider } from 'hooks/useDarkMode';
 
-import { createEmotionCache } from '../src/util/emotion';
+import 'styles/globals.scss';
 
 const getMaterialTheme = (theme) =>
   createTheme({
@@ -27,7 +24,7 @@ const clientSideEmotionCache = createEmotionCache();
 
 const MaterialTheme = ({ children }) => {
   const [mounted, setMounted] = React.useState(false);
-  const { theme } = useDarkLightTheme();
+  const { theme } = useDarkMode();
 
   // When mounted on client, now we can show the UI
   React.useEffect(() => setMounted(true), []);
@@ -55,11 +52,11 @@ const MyApp = ({
           content="initial-scale=1, width=device-width"
         />
       </Head>
-      <DarkLightThemes defaultTheme="dark">
+      <DarkModeProvider defaultTheme="dark">
         <MaterialTheme>
           <Component {...pageProps} />
         </MaterialTheme>
-      </DarkLightThemes>
+      </DarkModeProvider>
     </CacheProvider>
   );
 };

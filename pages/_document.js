@@ -9,7 +9,7 @@ import Document, {
 } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 
-import { createEmotionCache } from '../src/util/emotion';
+import { createEmotionCache } from 'util/emotion';
 
 export default class MyDocument extends Document {
   render() {

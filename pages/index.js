@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import { Header } from '../src/components/Header';
-import { Section } from '../src/components/Section';
-import { PrimaryButton } from '../src/components/Button';
+import { Header } from 'components/Header';
+import { Section } from 'components/Section';
+import { PrimaryButton } from 'components/Button';
 
-import * as TABLES from '../src/components/Tables';
-import { Features } from '../src/components/Features';
-import { Themes } from '../src/components/Themes';
+import * as TABLES from 'components/Tables';
+import { Features } from 'components/Features';
+import { Themes } from 'components/Themes';
 
 const planetOne =
   'linear-gradient(to bottom, rgba(27,41,72,1) 0%,rgba(31,49,79,1) 0%,rgba(20,25,52,1) 10%,rgba(15,14,39,1) 21%,rgba(11,9,29,1) 52%,rgba(13,12,32,1) 100%)';
