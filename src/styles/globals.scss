@@ -55,7 +55,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span, p {
 
 h1 {
   font-weight: 700;
-  font-size: var(--theme-ui-size-h1);
+  font-size: 6rem;
   line-height: 1;
   letter-spacing: -2px;
 
@@ -72,13 +72,12 @@ h1 {
 
 h2 {
   font-weight: 700;
-  font-size: var(--theme-ui-size-h2);
   font-size: 4rem;
   line-height: 4rem;
   letter-spacing: -1.6px;
 
   color: var(--theme-ui-colors-text);
-  margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
   margin-top: 0rem;
 }
 

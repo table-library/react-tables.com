@@ -91,7 +91,7 @@ const code = `
 const Features = () => {
   return (
     <>
-      <div className={styles.grid}>
+      <div className={styles.grid} style={{ maxWidth: '900px' }}>
         <div className={styles.gridItem}>
           <DarkModeIcon />
           Theming

@@ -1,13 +1,10 @@
 import Image from 'next/image';
-import BrushIcon from '@mui/icons-material/Brush';
-import ColorLensIcon from '@mui/icons-material/ColorLens';
-import FormatPaintIcon from '@mui/icons-material/FormatPaint';
 
 import styles from '../Features/Features.module.scss';
 
 const Themes = () => {
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} style={{ maxWidth: '450px' }}>
       <div className={styles.gridItem}>
         <Image
           alt="material"
@@ -37,6 +34,36 @@ const Themes = () => {
           style={{ borderRadius: '50%' }}
         />
         <span>Mantine</span>
+      </div>
+      <div className={styles.gridItem}>
+        <Image
+          alt="ant design"
+          src="/themes/antdesign.png"
+          height="64"
+          width="64"
+          style={{ borderRadius: '50%' }}
+        />
+        <span>Ant Design</span>
+      </div>
+      <div className={styles.gridItem}>
+        <Image
+          alt="bootstrap"
+          src="/themes/bootstrap.png"
+          height="64"
+          width="64"
+          style={{ borderRadius: '50%' }}
+        />
+        <span>Bootstrap</span>
+      </div>
+      <div className={styles.gridItem}>
+        <Image
+          alt="semantic"
+          src="/themes/semantic.png"
+          height="64"
+          width="64"
+          style={{ borderRadius: '50%' }}
+        />
+        <span>Semantic UI</span>
       </div>
     </div>
   );

@@ -409,8 +409,9 @@ const CoinsTable = () => {
       >
         <Stack direction="row" spacing={1} m={1}>
           <Button
-            color={isWatchlistActive ? 'primary' : 'secondary'}
+            color="secondary"
             size="small"
+            variant={isWatchlistActive ? 'outlined' : 'text'}
             startIcon={
               isWatchlistActive ? <StarIcon /> : <StarOutlineIcon />
             }
@@ -430,8 +431,9 @@ const CoinsTable = () => {
           {Object.keys(CATEGORIES).map((key) => (
             <Button
               key={key}
+              color="secondary"
               size="small"
-              color={key === activeCategory ? 'primary' : 'secondary'}
+              variant={key === activeCategory ? 'outlined' : 'text'}
               onClick={() => setActiveCategory(key)}
             >
               {CATEGORIES[key].label}
@@ -441,8 +443,9 @@ const CoinsTable = () => {
 
         <Stack direction="row" spacing={1} m={1}>
           <Button
-            color={isCustomizeActive ? 'primary' : 'secondary'}
+            color="secondary"
             size="small"
+            variant={isCustomizeActive ? 'outlined' : 'text'}
             onClick={() => setCustomizeActive(!isCustomizeActive)}
           >
             Customize
@@ -471,12 +474,13 @@ const CoinsTable = () => {
             {Object.keys(CUSTOM_COLUMNS).map((key) => (
               <Button
                 key={key}
-                color={
-                  customColumnsActive.includes(key)
-                    ? 'primary'
-                    : 'secondary'
-                }
+                color="secondary"
                 size="small"
+                variant={
+                  customColumnsActive.includes(key)
+                    ? 'outlined'
+                    : 'text'
+                }
                 onClick={() =>
                   customColumnsActive.includes(key)
                     ? setCustomColumnsActive(
