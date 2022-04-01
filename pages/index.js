@@ -15,15 +15,14 @@ export default function Home() {
       <main>
         <LandingSection />
 
-        <Section>
-          <h2>CoinMarketCap</h2>
+        <Section noPaddingOnMobile>
+          <h2 style={{ textAlign: 'center' }}>Coin Market Cap</h2>
 
           <div
             style={{
               width: '90vw',
               display: 'flex',
               flexDirection: 'column',
-              margin: '20px',
             }}
           >
             <TABLES.CoinMarketCap />
@@ -51,19 +50,18 @@ export default function Home() {
             },
           ]}
         >
-          <h2>Features</h2>
+          <h2 style={{ textAlign: 'center' }}>Features</h2>
           <Features />
         </Section>
 
-        <Section>
-          <h2>Asana</h2>
+        <Section noPaddingOnMobile>
+          <h2 style={{ textAlign: 'center' }}>Asana</h2>
 
           <div
             style={{
               width: '90vw',
               display: 'flex',
               flexDirection: 'column',
-              margin: '20px',
             }}
           >
             <TABLES.Asana />
@@ -91,7 +89,7 @@ export default function Home() {
             },
           ]}
         >
-          <h2>Built-In Themes</h2>
+          <h2 style={{ textAlign: 'center' }}>Built-In Themes</h2>
           <Themes />
         </Section>
 

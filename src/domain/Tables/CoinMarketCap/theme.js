@@ -1,3 +1,12 @@
+const disablePin = `
+  @media screen and (max-width: 480px) {
+    &.pin-left, &.pin-right {
+      position: static;
+      z-index: 1;
+    }
+  }
+`;
+
 export const CUSTOM_SHARED_THEME = ({
   isLightMode,
   isLightModeFinished,
@@ -29,6 +38,8 @@ export const CUSTOM_SHARED_THEME = ({
     border-top: 1px solid transparent;
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
+
+    ${disablePin}
 
     min-width: 20%;
     width: 20%;

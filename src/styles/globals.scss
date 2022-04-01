@@ -13,9 +13,6 @@
 
   --theme-ui-shadows-box: 0 0 32px 0 rgb(88 47 213 / 32%), 0 0 8px 0 rgb(88 47 213 / 48%);
   --theme-ui-shadows-text: 0 0 80px rgb(192 219 255 / 48%), 0 0 32px rgb(65 120 255 / 24%);
-
-  --theme-ui-size-h1: 6rem;
-  --theme-ui-size-h2: 4rem;
 }
 
 [data-theme='light'] {
@@ -33,9 +30,6 @@
 
   --theme-ui-shadows-box: 0;
   --theme-ui-shadows-text: 0;
-
-  --theme-ui-size-h1: 6rem;
-  --theme-ui-size-h2: 6rem;
 }
 
 html,
@@ -73,7 +67,7 @@ h1 {
 h2 {
   font-weight: 700;
   font-size: 4rem;
-  line-height: 4rem;
+  line-height: 1;
   letter-spacing: -1.6px;
 
   color: var(--theme-ui-colors-text);

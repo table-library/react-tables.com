@@ -12,10 +12,17 @@
 
 .content {
   padding: 8rem 2rem;
+
   z-index: 1;
   position: relative;
 
   display: flex;
+}
+
+.noPaddingOnMobile {
+  @media screen and (max-width: 480px) {
+    padding: 8rem 0rem;
+  }
 }
 
 .center {

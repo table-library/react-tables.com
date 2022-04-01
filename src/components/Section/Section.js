@@ -7,6 +7,7 @@ import styles from './Section.module.scss';
 const Section = ({
   split = false,
   grid = false,
+  noPaddingOnMobile = false,
   planets = [],
   alignment = 'center',
   children,
@@ -18,6 +19,7 @@ const Section = ({
       <div
         className={clsx(styles.content, styles[alignment], {
           [styles.split]: split,
+          [styles.noPaddingOnMobile]: noPaddingOnMobile,
         })}
       >
         {children}

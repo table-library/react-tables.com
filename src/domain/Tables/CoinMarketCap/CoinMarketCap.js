@@ -405,6 +405,7 @@ const CoinsTable = () => {
         justifyContent="space-between"
         style={{
           borderBottom: '1px solid var(--theme-ui-colors-border)',
+          overflowX: 'auto',
         }}
       >
         <Stack direction="row" spacing={1} m={1}>
@@ -459,6 +460,7 @@ const CoinsTable = () => {
           justifyContent="space-between"
           style={{
             borderBottom: '1px solid var(--theme-ui-colors-border)',
+            overflowX: 'auto',
           }}
         >
           <Stack

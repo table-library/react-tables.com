@@ -112,7 +112,7 @@ const AsanaRow = ({
       <Row item={item} className={clsx({ first: isFirst })}>
         <Cell>
           <AlignCenter spaceBetween>
-            <AlignCenter hasEllipse>
+            <AlignCenter style={{ minWidth: '20px' }}>
               {React.cloneElement(ICON_MAPPING[item.icon], {
                 fontSize: 'small',
               })}

@@ -17,7 +17,6 @@ export const TableThemeProvider = ({ theme, children }) => {
 
 export const AlignCenter = ({
   children,
-  hasEllipse = false,
   spaceBetween = false,
   style = {},
 }) => (
@@ -26,7 +25,6 @@ export const AlignCenter = ({
       display: 'flex',
       alignItems: 'center',
       ...(spaceBetween ? { justifyContent: 'space-between' } : {}),
-      ...(hasEllipse ? { minWidth: 0 } : {}),
       ...style,
     }}
   >
