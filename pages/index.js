@@ -5,7 +5,9 @@ import { planetOne, planetTwo } from 'components/Planets';
 import * as TABLES from 'domain/Tables';
 import { Features } from 'domain/Features';
 import { Themes } from 'domain/Themes';
+import { Configurator } from 'domain/Configurator';
 import { LandingSection, OutlineSection } from 'domain/Sections';
+import { ClipText } from 'components/ClipText';
 
 export default function Home() {
   return (
@@ -91,6 +93,16 @@ export default function Home() {
         >
           <h2 style={{ textAlign: 'center' }}>Built-In Themes</h2>
           <Themes />
+        </Section>
+
+        <Section grid>
+          <h2>
+            <ClipText breakline>Table</ClipText> Configurator
+          </h2>
+        </Section>
+
+        <Section>
+          <Configurator />
         </Section>
 
         <OutlineSection />

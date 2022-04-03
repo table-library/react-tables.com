@@ -5,7 +5,6 @@ export const nodes = [
     deadline: new Date(2020, 1, 15),
     type: 'SETUP',
     isComplete: true,
-    _hasContent: false,
     nodes: null,
   },
   {
@@ -14,7 +13,6 @@ export const nodes = [
     deadline: new Date(2020, 1, 17),
     type: 'SETUP',
     isComplete: true,
-    _hasContent: false,
     nodes: [],
   },
   {
@@ -23,7 +21,6 @@ export const nodes = [
     deadline: new Date(2020, 2, 28),
     type: 'LEARN',
     isComplete: true,
-    _hasContent: true,
     nodes: [
       {
         id: '22',
@@ -31,7 +28,6 @@ export const nodes = [
         deadline: new Date(2020, 2, 20),
         type: 'LEARN',
         isComplete: true,
-        _hasContent: true,
         nodes: [
           {
             id: '221',
@@ -39,7 +35,6 @@ export const nodes = [
             deadline: new Date(2020, 2, 18),
             type: 'LEARN',
             isComplete: true,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -48,7 +43,6 @@ export const nodes = [
             deadline: new Date(2020, 2, 19),
             type: 'LEARN',
             isComplete: true,
-            _hasContent: false,
             nodes: null,
           },
         ],
@@ -59,7 +53,6 @@ export const nodes = [
         deadline: new Date(2020, 2, 22),
         type: 'LEARN',
         isComplete: true,
-        _hasContent: true,
         nodes: [
           {
             id: '231',
@@ -67,7 +60,6 @@ export const nodes = [
             deadline: new Date(2020, 2, 20),
             type: 'LEARN',
             isComplete: true,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -76,7 +68,6 @@ export const nodes = [
             deadline: new Date(2020, 2, 21),
             type: 'LEARN',
             isComplete: true,
-            _hasContent: false,
             nodes: null,
           },
         ],
@@ -87,7 +78,6 @@ export const nodes = [
         deadline: new Date(2020, 2, 23),
         type: 'LEARN',
         isComplete: true,
-        _hasContent: false,
         nodes: [],
       },
     ],
@@ -98,7 +88,6 @@ export const nodes = [
     deadline: new Date(2020, 3, 8),
     type: 'LEARN',
     isComplete: false,
-    _hasContent: true,
     nodes: [
       {
         id: '31',
@@ -106,7 +95,6 @@ export const nodes = [
         deadline: new Date(2020, 3, 1),
         type: 'SETUP',
         isComplete: true,
-        _hasContent: false,
         nodes: null,
       },
       {
@@ -115,7 +103,6 @@ export const nodes = [
         deadline: new Date(2020, 3, 1),
         type: 'LEARN',
         isComplete: true,
-        _hasContent: false,
         nodes: null,
       },
       {
@@ -124,7 +111,6 @@ export const nodes = [
         deadline: new Date(2020, 4, 1),
         type: 'LEARN',
         isComplete: false,
-        _hasContent: false,
         nodes: [],
       },
       {
@@ -133,7 +119,6 @@ export const nodes = [
         deadline: new Date(2020, 5, 1),
         type: 'LEARN',
         isComplete: false,
-        _hasContent: false,
         nodes: null,
       },
       {
@@ -142,7 +127,6 @@ export const nodes = [
         deadline: new Date(2020, 6, 1),
         type: 'LEARN',
         isComplete: false,
-        _hasContent: false,
         nodes: [
           {
             id: '351',
@@ -150,7 +134,6 @@ export const nodes = [
             deadline: new Date(2020, 7, 1),
             type: 'LEARN',
             isComplete: true,
-            _hasContent: false,
             nodes: [],
           },
           {
@@ -159,7 +142,6 @@ export const nodes = [
             deadline: new Date(2020, 7, 1),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: [],
           },
         ],
@@ -172,7 +154,6 @@ export const nodes = [
     deadline: new Date(2020, 4, 28),
     type: 'SETUP',
     isComplete: false,
-    _hasContent: false,
     nodes: [],
   },
   {
@@ -181,7 +162,6 @@ export const nodes = [
     deadline: new Date(2020, 5, 18),
     type: 'LEARN',
     isComplete: true,
-    _hasContent: true,
     nodes: [
       {
         id: '51',
@@ -189,7 +169,6 @@ export const nodes = [
         deadline: new Date(2020, 5, 10),
         type: 'LEARN',
         isComplete: false,
-        _hasContent: false,
         nodes: null,
       },
     ],
@@ -200,7 +179,6 @@ export const nodes = [
     deadline: new Date(2020, 6, 30),
     type: 'LEARN',
     isComplete: false,
-    _hasContent: true,
     nodes: [
       {
         id: '61',
@@ -208,7 +186,6 @@ export const nodes = [
         deadline: new Date(2020, 6, 28),
         type: 'LEARN',
         isComplete: false,
-        _hasContent: true,
         nodes: [
           {
             id: '611',
@@ -216,7 +193,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 20),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -225,7 +201,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 21),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -234,7 +209,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 22),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -243,7 +217,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 23),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: true,
             nodes: [
               {
                 id: '6141',
@@ -251,7 +224,6 @@ export const nodes = [
                 deadline: new Date(2020, 6, 23),
                 type: 'LEARN',
                 isComplete: false,
-                _hasContent: false,
                 nodes: null,
               },
             ],
@@ -262,7 +234,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 24),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: null,
           },
           {
@@ -271,7 +242,6 @@ export const nodes = [
             deadline: new Date(2020, 6, 25),
             type: 'LEARN',
             isComplete: false,
-            _hasContent: false,
             nodes: null,
           },
         ],
