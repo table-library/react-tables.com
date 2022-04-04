@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.pane {
+  padding-top: 1rem;
+
+  width: 40vw;
+
+  @media screen and (max-width: 920px) {
+    padding-top: 0rem;
+  }
+
+  &::not(:last-of-type) {
+    padding-right: 1rem;
+  }
+}

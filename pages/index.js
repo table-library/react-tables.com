@@ -6,6 +6,8 @@ import * as TABLES from 'domain/Tables';
 import { Features } from 'domain/Features';
 import { Themes } from 'domain/Themes';
 import { Configurator } from 'domain/Configurator';
+import { Composition } from 'domain/Composition';
+import { Programming } from 'domain/Programming';
 import { LandingSection, OutlineSection } from 'domain/Sections';
 import { ClipText } from 'components/ClipText';
 
@@ -95,6 +97,20 @@ export default function Home() {
           <Themes />
         </Section>
 
+        <Section noPaddingOnMobile>
+          <h3>
+            <ClipText>Composition</ClipText> or Configuration
+          </h3>
+
+          <Composition />
+
+          <h3>
+            <ClipText>Declarative</ClipText> or Imperative
+          </h3>
+
+          <Programming />
+        </Section>
+
         <Section grid>
           <h2>
             <ClipText breakline>Table</ClipText> Configurator
@@ -104,11 +120,11 @@ export default function Home() {
         <Section>
           <Configurator />
         </Section>
-
-        <OutlineSection />
       </main>
 
-      <footer></footer>
+      <footer>
+        <OutlineSection />
+      </footer>
     </div>
   );
 }

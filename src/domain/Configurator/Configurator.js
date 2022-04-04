@@ -671,7 +671,8 @@ const Configurator = () => {
                   overflowX: 'auto',
                   fontSize: 'small',
                   minHeight: '100%',
-                  background: 'var(--theme-ui-colors-background)',
+                  backgroundColor:
+                    'var(--theme-ui-colors-background)',
                 }}
               />
             </div>

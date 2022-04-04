@@ -47,7 +47,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span, p {
   display: block;
 }
 
-h1 {
+h1, .h1 {
   font-weight: 700;
   font-size: 6rem;
   line-height: 1;
@@ -56,15 +56,19 @@ h1 {
   color: var(--theme-ui-colors-text);
   margin-bottom: 3rem;
   margin-top: 0rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 5rem;
+  }
 }
 
 [data-theme='dark'] {
-  h1 {
+  h1, .h1 {
     text-shadow: var(--theme-ui-shadows-text);
   }
 }
 
-h2 {
+h2, .h2 {
   font-weight: 700;
   font-size: 4rem;
   line-height: 1;
@@ -73,10 +77,55 @@ h2 {
   color: var(--theme-ui-colors-text);
   margin-bottom: 2rem;
   margin-top: 0rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 3rem;
+  }
 }
 
 [data-theme='dark'] {
-  h2 {
+  h2, .h2 {
+    text-shadow: var(--theme-ui-shadows-text);
+  }
+}
+
+h3, .h3 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: -1.6px;
+
+  color: var(--theme-ui-colors-text);
+  margin-bottom: 1.5rem;
+  margin-top: 0rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 2rem;
+  }
+}
+
+[data-theme='dark'] {
+  h3, .h3 {
+    text-shadow: var(--theme-ui-shadows-text);
+  }
+}
+
+h4, .h4 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+
+  color: var(--theme-ui-colors-text);
+  margin-bottom: 0rem;
+  margin-top: 0rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+[data-theme='dark'] {
+  h4, .h4 {
     text-shadow: var(--theme-ui-shadows-text);
   }
 }

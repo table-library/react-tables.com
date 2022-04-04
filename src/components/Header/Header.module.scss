@@ -17,7 +17,8 @@
     opacity: 0;
   }
 
-  padding: 0rem 4rem;
+  padding: 1rem 4rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,11 +28,11 @@
     align-items: center;
   }
 
-  h3 {
-    margin-right: 1.5rem;
-  }
-
-  a, button {
+  a:not(.logo), button {
     margin: 0 0.5rem;
   }
+}
+
+.logo {
+  margin-right: 1.5rem;
 }

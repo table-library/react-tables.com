@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 import IconButton from '@mui/material/IconButton';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -17,7 +18,9 @@ const Header = () => {
   return (
     <header className={clsx(styles.header, styles[scrollDirection])}>
       <div>
-        <h3>React Tables</h3>
+        <Link href="/">
+          <a className={clsx('h4', styles.logo)}>React Tables</a>
+        </Link>
         <a
           target="_blank"
           rel="noopener noreferrer"
