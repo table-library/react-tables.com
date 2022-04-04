@@ -31,23 +31,29 @@ import {
   useRowSelect,
   HeaderCellSelect,
   CellSelect,
+  SelectClickTypes,
+  SelectTypes,
 } from '@table-library/react-table-library/select';
 import {
   useTree,
   CellTree,
 } from '@table-library/react-table-library/tree';
 
+import MaterialCheckbox from '@mui/material/Checkbox';
+
 import { useDarkMode } from 'hooks/useDarkMode';
 
 import { nodes } from '../data';
 import { THEME } from '../theme';
+
+import { Wizard } from './Wizard';
 
 const getComponentCode = ({ resize, sort, select, tree }) => {
   // headerCellComponentTag
 
   let headerCellComponentTag = `HeaderCell`;
 
-  if (sort) {
+  if (sort.enabled) {
     headerCellComponentTag = `HeaderCellSort`;
   }
 
@@ -55,7 +61,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
   let headerCellComponentProps = ``;
 
-  if (resize) {
+  if (resize.enabled) {
     headerCellComponentProps = `
       ${headerCellComponentProps}
       resize
@@ -66,7 +72,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
   let hooks = '';
 
-  if (sort) {
+  if (sort.enabled) {
     hooks = `
       ${hooks}
       const sort = useSort(
@@ -85,19 +91,68 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
     `;
   }
 
-  if (select) {
+  if (select.enabled) {
+    let selectHook = `
+      ${hooks}
+      const select = useRowSelect(
+        data,
+        {
+          ${
+            select.hasInitialStateSingleSelect
+              ? 'state: { id: "2" },'
+              : ''
+          }
+          ${
+            select.hasInitialStateMultiSelect
+              ? 'state: { ids: ["2", "4"] },'
+              : ''
+          }
+          ${
+            select.hasCallbackHandler
+              ? 'onChange: onSelectChange,'
+              : ''
+          }
+        },
+        {
+          ${
+            select.selectOnlyCheckbox
+              ? `
+                clickType: SelectClickTypes.ButtonClick,
+              `
+              : ''
+          }
+          ${
+            select.allSingleSelect
+              ? `
+                rowSelect: SelectTypes.SingleSelect,
+                buttonSelect: SelectTypes.SingleSelect,
+              `
+              : ''
+          }
+          ${
+            select.allMultiSelect
+              ? `
+                rowSelect: SelectTypes.MultiSelect,
+                buttonSelect: SelectTypes.MultiSelect,
+              `
+              : ''
+          }
+        }
+      );
+    `;
+
     hooks = `
       ${hooks}
-      const select = useRowSelect(data);
+      ${selectHook}
     `;
   }
 
-  if (tree) {
+  if (tree.enabled) {
     let treeHook = `
       const tree = useTree(data);
     `;
 
-    if (select) {
+    if (select.enabled) {
       treeHook = `
         const tree = useTree(data, null, {
           treeYLevel: 1,
@@ -111,6 +166,69 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
     `;
   }
 
+  // hasCallbackHandler
+
+  let callbackHandlers = '';
+
+  if (resize.enabled && resize.hasCallbackHandler) {
+  }
+
+  if (sort.enabled && sort.hasCallbackHandler) {
+  }
+
+  if (select.enabled && select.hasCallbackHandler) {
+    callbackHandlers = `
+      ${callbackHandlers}
+      function onSelectChange(action, state) {
+        console.log(action, state);
+      }
+    `;
+  }
+
+  if (tree.enabled && tree.hasCallbackHandler) {
+  }
+
+  // header cell select
+
+  let headerCellSelect = '';
+
+  if (select.enabled && select.checkbox) {
+    headerCellSelect = '<HeaderCellSelect />';
+
+    if (select.thirdParty) {
+      headerCellSelect = `
+        <HeaderCell stiff>
+          <MaterialCheckbox
+            size="small"
+            checked={select.state.all}
+            indeterminate={!select.state.all && !select.state.none}
+            onChange={select.fns.onToggleAll}
+          />
+        </HeaderCell>
+      `;
+    }
+  }
+
+  // cell select
+
+  let cellSelect = '';
+
+  if (select.enabled && select.checkbox) {
+    cellSelect = '<CellSelect item={item} />';
+
+    if (select.thirdParty) {
+      cellSelect = `
+        <Cell stiff>
+          <MaterialCheckbox
+            size="small"
+            checked={select.state.ids.includes(item.id)}
+            onChange={() => select.fns.onToggleById(item.id)}
+          />
+        </Cell>
+      `;
+    }
+  }
+
   // tableComponentOpen
 
   let tableComponentOpen = `
@@ -119,21 +237,21 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
       theme={theme}
   `;
 
-  if (sort) {
+  if (sort.enabled) {
     tableComponentOpen = `
       ${tableComponentOpen}
       sort={sort}
     `;
   }
 
-  if (select) {
+  if (select.enabled) {
     tableComponentOpen = `
       ${tableComponentOpen}
       select={select}
   `;
   }
 
-  if (tree) {
+  if (tree.enabled) {
     tableComponentOpen = `
       ${tableComponentOpen}
       tree={tree}
@@ -149,7 +267,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
   let firstCellComponent = `<Cell>{item.name}</Cell>`;
 
-  if (tree) {
+  if (tree.enabled) {
     firstCellComponent = `<CellTree item={item}>{item.name}</CellTree>`;
   }
 
@@ -161,27 +279,29 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
       ${hooks}
 
+      ${callbackHandlers}
+
       return (
         ${tableComponentOpen}
           {(tableList) => (
             <>
               <Header>
                 <HeaderRow>
-                  ${select ? '<HeaderCellSelect />' : ''}
+                  ${headerCellSelect}
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort ? 'sortKey="Task"' : ''
+    sort.enabled ? 'sortKey="Task"' : ''
   }>Task</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort ? 'sortKey="Deadline"' : ''
+    sort.enabled ? 'sortKey="Deadline"' : ''
   }>Deadline</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort ? 'sortKey="Type"' : ''
+    sort.enabled ? 'sortKey="Type"' : ''
   }>Type</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort ? 'sortKey="Complete"' : ''
+    sort.enabled ? 'sortKey="Complete"' : ''
   }>Complete</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort ? 'sortKey="Tasks"' : ''
+    sort.enabled ? 'sortKey="Tasks"' : ''
   }>Tasks</${headerCellComponentTag}>
                 </HeaderRow>
               </Header>
@@ -189,7 +309,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
               <Body>
                 {tableList.map((item) => (
                   <Row key={item.id} item={item}>
-                    ${select ? '<CellSelect item={item} />' : ''}
+                    ${cellSelect}
                     ${firstCellComponent}
                     <Cell>
                       {item.deadline.toLocaleDateString('en-US', {
@@ -227,10 +347,10 @@ const getImportsCode = ({ resize, sort, select, tree }) => {
     import { useTheme } from '@table-library/react-table-library/theme';
   `;
 
-  if (resize) {
+  if (resize.enabled) {
   }
 
-  if (sort) {
+  if (sort.enabled) {
     imports = `
       ${imports}
       import {
@@ -240,18 +360,27 @@ const getImportsCode = ({ resize, sort, select, tree }) => {
     `;
   }
 
-  if (select) {
+  if (select.enabled) {
     imports = `
       ${imports}
       import {
         useRowSelect,
         HeaderCellSelect,
         CellSelect,
+        SelectClickTypes,
+        SelectTypes,
       } from '@table-library/react-table-library/select';
     `;
+
+    if (select.thirdParty) {
+      imports = `
+        ${imports}
+        import MaterialCheckbox from '@mui/material/Checkbox';
+      `;
+    }
   }
 
-  if (tree) {
+  if (tree.enabled) {
     imports = `
       ${imports}
       import {
@@ -315,17 +444,26 @@ const Configurator = () => {
     LIVE_EDTIOR_VIEWS[0]
   );
 
-  const [resize, setResize] = React.useState(false);
-  const [sort, setSort] = React.useState(false);
-  const [select, setSelect] = React.useState(false);
-  const [tree, setTree] = React.useState(false);
-
-  const code = getCode(liveEditorView, {
-    resize,
-    sort,
-    select,
-    tree,
+  const [features, setFeatures] = React.useState({
+    resize: {
+      enabled: false,
+    },
+    sort: {
+      enabled: false,
+    },
+    select: {
+      enabled: false,
+    },
+    tree: {
+      enabled: false,
+    },
   });
+
+  React.useEffect(() => {
+    setLiveEditorView(LIVE_EDTIOR_VIEWS[0]);
+  }, [features]);
+
+  const code = getCode(liveEditorView, features);
 
   const handleCopyToClipboard = () => copy(code);
 
@@ -355,9 +493,13 @@ const Configurator = () => {
           useRowSelect,
           HeaderCellSelect,
           CellSelect,
+          SelectClickTypes,
+          SelectTypes,
 
           useTree,
           CellTree,
+
+          MaterialCheckbox,
         }}
       >
         <SplitPane
@@ -377,30 +519,7 @@ const Configurator = () => {
                   '1px solid var(--theme-ui-colors-border)',
               }}
             >
-              <Button
-                style={{ borderRadius: 0 }}
-                onClick={() => setResize(!resize)}
-              >
-                {resize ? 'Disable' : 'Enable'} Resize
-              </Button>
-              <Button
-                style={{ borderRadius: 0 }}
-                onClick={() => setSort(!sort)}
-              >
-                {sort ? 'Disable' : 'Enable'} Sort
-              </Button>
-              <Button
-                style={{ borderRadius: 0 }}
-                onClick={() => setSelect(!select)}
-              >
-                {select ? 'Disable' : 'Enable'} Select
-              </Button>
-              <Button
-                style={{ borderRadius: 0 }}
-                onClick={() => setTree(!tree)}
-              >
-                {tree ? 'Disable' : 'Enable'} Tree
-              </Button>
+              <Wizard features={features} setFeatures={setFeatures} />
             </div>
             <div style={{ minHeight: '100%' }}>
               <div
