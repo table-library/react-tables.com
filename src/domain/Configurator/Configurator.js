@@ -37,9 +37,17 @@ import {
 import {
   useTree,
   CellTree,
+  TreeExpandClickTypes,
 } from '@table-library/react-table-library/tree';
 
 import MaterialCheckbox from '@mui/material/Checkbox';
+
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import FolderIcon from '@mui/icons-material/Folder';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
 import { useDarkMode } from 'hooks/useDarkMode';
 
@@ -73,11 +81,17 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
   let hooks = '';
 
   if (sort.enabled) {
-    hooks = `
-      ${hooks}
+    let sortHook = `
       const sort = useSort(
         data,
-        null,
+        {
+          ${
+            sort.hasInitialState
+              ? 'state: { sortKey: "TASK", reverse: true, },'
+              : ''
+          }
+          ${sort.hasCallbackHandler ? 'onChange: onSortChange,' : ''}
+        },
         {
           sortFns: {
             TASK: (array) => array.sort((a, b) => a.name.localeCompare(b.name)),
@@ -86,14 +100,30 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
             COMPLETE: (array) => array.sort((a, b) => a.isComplete - b.isComplete),
             TASKS: (array) => array.sort((a, b) => (a.nodes || []).length - (b.nodes || []).length),
           },
+          ${
+            sort.thirdParty
+              ? `
+                sortIcon: {
+                  margin: '4px',
+                  iconDefault: <UnfoldMoreOutlinedIcon fontSize="small" />,
+                  iconUp: <KeyboardArrowUpOutlinedIcon fontSize="small" />,
+                  iconDown: <KeyboardArrowDownOutlinedIcon fontSize="small" />,
+                },
+              `
+              : ''
+          }
         },
       );
+    `;
+
+    hooks = `
+      ${hooks}
+      ${sortHook}
     `;
   }
 
   if (select.enabled) {
     let selectHook = `
-      ${hooks}
       const select = useRowSelect(
         data,
         {
@@ -149,16 +179,44 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
   if (tree.enabled) {
     let treeHook = `
-      const tree = useTree(data);
+      const tree = useTree(
+        data,
+        {
+          ${
+            tree.hasInitialState
+              ? 'state: { ids: ["2", "62", "4"] },'
+              : ''
+          }
+          ${tree.hasCallbackHandler ? 'onChange: onTreeChange,' : ''}
+        },
+        {
+          ${
+            tree.thirdParty
+              ? `
+                treeIcon: {
+                  margin: '4px',
+                  iconDefault: <InsertDriveFileOutlinedIcon fontSize="small" />,
+                  iconRight: <FolderIcon fontSize="small" />,
+                  iconDown: <FolderOpenIcon fontSize="small" />,
+                },
+              `
+              : ''
+          }
+          ${
+            tree.treeColumn
+              ? 'treeYLevel: 2,'
+              : select.enabled
+              ? 'treeYLevel: 1,'
+              : ''
+          }
+          ${
+            tree.expandOnlyIcon
+              ? 'clickType: TreeExpandClickTypes.ButtonClick,'
+              : ''
+          }
+        }
+      );
     `;
-
-    if (select.enabled) {
-      treeHook = `
-        const tree = useTree(data, null, {
-          treeYLevel: 1,
-        });
-      `;
-    }
 
     hooks = `
       ${hooks}
@@ -174,6 +232,12 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
   }
 
   if (sort.enabled && sort.hasCallbackHandler) {
+    callbackHandlers = `
+      ${callbackHandlers}
+      function onSortChange(action, state) {
+        console.log(action, state);
+      }
+  `;
   }
 
   if (select.enabled && select.hasCallbackHandler) {
@@ -186,6 +250,12 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
   }
 
   if (tree.enabled && tree.hasCallbackHandler) {
+    callbackHandlers = `
+      ${callbackHandlers}
+      function onTreeChange(action, state) {
+        console.log(action, state);
+      }
+    `;
   }
 
   // header cell select
@@ -267,8 +337,16 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
 
   let firstCellComponent = `<Cell>{item.name}</Cell>`;
 
-  if (tree.enabled) {
+  if (tree.enabled && !tree.treeColumn) {
     firstCellComponent = `<CellTree item={item}>{item.name}</CellTree>`;
+  }
+
+  // thirdCellComponent
+
+  let thirdCellComponent = `<Cell>{item.type}</Cell>`;
+
+  if (tree.enabled && tree.treeColumn) {
+    thirdCellComponent = `<CellTree item={item}>{item.type}</CellTree>`;
   }
 
   return `
@@ -289,19 +367,19 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
                 <HeaderRow>
                   ${headerCellSelect}
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort.enabled ? 'sortKey="Task"' : ''
+    sort.enabled ? 'sortKey="TASK"' : ''
   }>Task</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort.enabled ? 'sortKey="Deadline"' : ''
+    sort.enabled ? 'sortKey="DEADLINE"' : ''
   }>Deadline</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort.enabled ? 'sortKey="Type"' : ''
+    sort.enabled ? 'sortKey="TYPE"' : ''
   }>Type</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort.enabled ? 'sortKey="Complete"' : ''
+    sort.enabled ? 'sortKey="COMPLETE"' : ''
   }>Complete</${headerCellComponentTag}>
                   <${headerCellComponentTag} ${headerCellComponentProps} ${
-    sort.enabled ? 'sortKey="Tasks"' : ''
+    sort.enabled ? 'sortKey="TASKS"' : ''
   }>Tasks</${headerCellComponentTag}>
                 </HeaderRow>
               </Header>
@@ -318,7 +396,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
                         day: '2-digit',
                       })}
                     </Cell>
-                    <Cell>{item.type}</Cell>
+                    ${thirdCellComponent}
                     <Cell>{item.isComplete.toString()}</Cell>
                     <Cell>{item.nodes ? item.nodes.length : ''}</Cell>
                   </Row>
@@ -358,6 +436,15 @@ const getImportsCode = ({ resize, sort, select, tree }) => {
         HeaderCellSort,
       } from '@table-library/react-table-library/sort';
     `;
+
+    if (sort.thirdParty) {
+      imports = `
+        ${imports}
+        import UnfoldMoreOutlinedIcon from '@mui/icons-material/UnfoldMoreOutlined';
+        import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+        import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+      `;
+    }
   }
 
   if (select.enabled) {
@@ -386,8 +473,18 @@ const getImportsCode = ({ resize, sort, select, tree }) => {
       import {
         useTree,
         CellTree,
+        TreeExpandClickTypes,
       } from '@table-library/react-table-library/tree';
     `;
+
+    if (tree.thirdParty) {
+      imports = `
+      ${imports}
+      import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+      import FolderIcon from '@mui/icons-material/Folder';
+      import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+    `;
+    }
   }
 
   return imports;
@@ -498,8 +595,17 @@ const Configurator = () => {
 
           useTree,
           CellTree,
+          TreeExpandClickTypes,
 
           MaterialCheckbox,
+
+          InsertDriveFileOutlinedIcon,
+          FolderIcon,
+          FolderOpenIcon,
+
+          UnfoldMoreOutlinedIcon,
+          KeyboardArrowUpOutlinedIcon,
+          KeyboardArrowDownOutlinedIcon,
         }}
       >
         <SplitPane
