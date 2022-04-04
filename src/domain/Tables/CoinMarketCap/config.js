@@ -74,4 +74,6 @@ export const CUSTOM_COLUMNS = {
 
 export const DEFAULT_PAGE = 1;
 export const DEFAULT_SIZE = 10;
+
 export const DEFAULT_CATEGORY = 'cryptocurrencies';
+export const WATCHLIST_CATEGORY = 'watchlist';

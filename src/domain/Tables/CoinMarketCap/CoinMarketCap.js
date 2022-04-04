@@ -34,6 +34,7 @@ import {
   Row,
   HeaderCell,
   Cell,
+  useCustom,
 } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { usePagination } from '@table-library/react-table-library/pagination';
@@ -47,6 +48,7 @@ import {
   DEFAULT_PAGE,
   DEFAULT_SIZE,
   DEFAULT_CATEGORY,
+  WATCHLIST_CATEGORY,
 } from './config';
 import {
   CUSTOM_SHARED_THEME,
@@ -260,14 +262,14 @@ const CoinsTable = () => {
 
   // watchlist
 
-  const [isWatchlistActive, setWatchlistActive] =
-    React.useState(false);
-  const [favorites, setFavorites] = useLocalStorageState(
-    'favorites',
-    {
-      defaultValue: [],
-    }
-  );
+  const [watched, setWatched] = useLocalStorageState('watched', {
+    defaultValue: [],
+  });
+
+  // category
+
+  const [activeCategory, setActiveCategory] =
+    React.useState(DEFAULT_CATEGORY);
 
   // customize
 
@@ -317,24 +319,10 @@ const CoinsTable = () => {
     }))
   );
 
-  const data = { nodes: isWatchlistActive ? favorites : currencies };
-
-  // category
-
-  const [activeCategory, setActiveCategory] =
-    React.useState(DEFAULT_CATEGORY);
-
-  React.useEffect(() => {
-    const size = activeCategory === DEFAULT_CATEGORY ? 10 : 50; // TODO
-
-    pagination.fns.onSetPage(DEFAULT_PAGE);
-    pagination.fns.onSetSize(size);
-
-    fetchCurrencies(
-      { page: DEFAULT_PAGE, size: size, category: activeCategory },
-      { overlayLoading: true }
-    );
-  }, [activeCategory]);
+  const data = {
+    nodes:
+      activeCategory === WATCHLIST_CATEGORY ? watched : currencies,
+  };
 
   // pagination
 
@@ -348,7 +336,7 @@ const CoinsTable = () => {
       onChange: onPaginationChange,
     },
     {
-      isServer: isWatchlistActive ? false : true,
+      isServer: activeCategory === WATCHLIST_CATEGORY ? false : true,
     }
   );
 
@@ -363,20 +351,44 @@ const CoinsTable = () => {
     );
   }
 
+  // activeCategory
+
+  useCustom('activeCategory', data, {
+    state: { activeCategory },
+    onChange: onActiveCategoryChange,
+  });
+
+  function onActiveCategoryChange(action, state) {
+    const size = state.activeCategory === DEFAULT_CATEGORY ? 10 : 50; // TODO
+
+    pagination.fns.onSetPage(DEFAULT_PAGE);
+    pagination.fns.onSetSize(size);
+
+    fetchCurrencies(
+      {
+        page: DEFAULT_PAGE,
+        size: size,
+        category: state.activeCategory,
+      },
+      { overlayLoading: true }
+    );
+  }
+
   // watchlist handler
 
   const handleFavorite = (item) => {
-    if (favorites.map((value) => value.id).includes(item.id)) {
-      setFavorites(favorites.filter((value) => value.id !== item.id));
+    if (watched.map((value) => value.id).includes(item.id)) {
+      setWatched(watched.filter((value) => value.id !== item.id));
     } else {
-      setFavorites(favorites.concat(item));
+      setWatched(watched.concat(item));
     }
   };
 
   const handleWatchList = () => {
     pagination.fns.onSetPage(DEFAULT_PAGE);
     pagination.fns.onSetSize(DEFAULT_SIZE);
-    setWatchlistActive(!isWatchlistActive);
+
+    setActiveCategory(WATCHLIST_CATEGORY);
   };
 
   // reactive query
@@ -412,9 +424,17 @@ const CoinsTable = () => {
           <Button
             color="secondary"
             size="small"
-            variant={isWatchlistActive ? 'outlined' : 'text'}
+            variant={
+              activeCategory === WATCHLIST_CATEGORY
+                ? 'outlined'
+                : 'text'
+            }
             startIcon={
-              isWatchlistActive ? <StarIcon /> : <StarOutlineIcon />
+              activeCategory === WATCHLIST_CATEGORY ? (
+                <StarIcon />
+              ) : (
+                <StarOutlineIcon />
+              )
             }
             onClick={handleWatchList}
           >
@@ -611,7 +631,7 @@ const CoinsTable = () => {
                               size="small"
                               onClick={() => handleFavorite(item)}
                             >
-                              {favorites
+                              {watched
                                 .map((value) => value.id)
                                 .includes(item.id) ? (
                                 <StarIcon fontSize="small" />
@@ -732,7 +752,9 @@ const CoinsTable = () => {
 
       <TablePagination
         count={
-          isWatchlistActive ? data.nodes.length : 9688 // TODO API does not offer this number
+          activeCategory === WATCHLIST_CATEGORY
+            ? data.nodes.length
+            : 9688 // TODO API does not offer this number
         }
         page={pagination.state.page}
         rowsPerPage={pagination.state.size}
