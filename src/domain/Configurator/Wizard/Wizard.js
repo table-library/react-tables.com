@@ -44,7 +44,6 @@ const Wizard = ({ features, setFeatures }) => {
           activeStep={Object.keys(steps).findIndex(
             (key) => activeStep === key
           )}
-          sx={{ overflowY: 'auto' }}
         >
           {Object.keys(steps).map((key) => (
             <Step key={key} completed={features[key].enabled}>

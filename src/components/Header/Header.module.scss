@@ -19,6 +19,10 @@
 
   padding: 1rem 4rem;
 
+  @media screen and (max-width: 480px) {
+    padding: 1rem 2rem;
+  }
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,4 +39,5 @@
 
 .logo {
   margin-right: 1.5rem;
+  white-space: nowrap;
 }
