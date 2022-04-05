@@ -58,7 +58,10 @@ const Wizard = ({ features, setFeatures }) => {
           ))}
 
           <Step key="-1" disabled>
-            <StepButton color="inherit">WIP ...</StepButton>
+            <StepButton color="inherit">WIP (Beta)</StepButton>
+          </Step>
+          <Step key="-1" disabled>
+            <StepButton color="inherit">WIP (Beta)</StepButton>
           </Step>
         </Stepper>
       </div>

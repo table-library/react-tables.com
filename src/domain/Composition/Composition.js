@@ -1,13 +1,12 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
+import { DocCode } from 'components/DocCode';
 import { Highlight } from 'components/Highlight';
 
 import styles from './Composition.module.scss';
 
 const composition = `
-// composition
-
 <Table data={data}>
   {(tableList) => (
     <>
@@ -32,8 +31,6 @@ const composition = `
 `;
 
 const configuration = `
-// configuration
-
 <CompactTable
   data={data}
   columns={[
@@ -52,12 +49,12 @@ const configuration = `
 const Composition = () => {
   return (
     <div className={clsx(styles.container)}>
-      <div className={clsx(styles.pane)}>
+      <DocCode fileName="composition.js">
         <Highlight code={composition} />
-      </div>
-      <div className={clsx(styles.pane)}>
+      </DocCode>
+      <DocCode fileName="configuration.js">
         <Highlight code={configuration} />
-      </div>
+      </DocCode>
     </div>
   );
 };

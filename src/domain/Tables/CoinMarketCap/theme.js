@@ -1,5 +1,5 @@
 const disablePin = `
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 920px) {
     &.pin-left, &.pin-right {
       position: static;
       z-index: 1;

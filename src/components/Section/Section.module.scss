@@ -6,23 +6,17 @@
   overflow: hidden;
 
   position: relative;
-
-  display: flex;
 }
 
 .content {
   padding: 8rem 2rem;
 
+  min-height: 100vh;
+
   z-index: 1;
   position: relative;
 
   display: flex;
-}
-
-.noPaddingOnMobile {
-  @media screen and (max-width: 480px) {
-    padding: 8rem 0rem;
-  }
 }
 
 .center {
@@ -37,6 +31,16 @@
 
 .split {
   flex-direction: row;
+
+  @media screen and (max-width: 920px) {
+    flex-direction: column;
+    align-items: center;
+
+    & > * {
+      margin-bottom: 6rem;
+    }
+  }
+
 }
 
 .grid {

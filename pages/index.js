@@ -19,7 +19,7 @@ export default function Home() {
       <main>
         <LandingSection />
 
-        <Section noPaddingOnMobile>
+        <Section>
           <h2 style={{ textAlign: 'center' }}>Coin Market Cap</h2>
 
           <div
@@ -58,7 +58,7 @@ export default function Home() {
           <Features />
         </Section>
 
-        <Section noPaddingOnMobile>
+        <Section>
           <h2 style={{ textAlign: 'center' }}>Asana</h2>
 
           <div
@@ -97,23 +97,37 @@ export default function Home() {
           <Themes />
         </Section>
 
-        <Section noPaddingOnMobile>
-          <h3>
-            <ClipText>Composition</ClipText> or Configuration
-          </h3>
+        <Section grid>
+          <h2>
+            <ClipText>Composition</ClipText> & Configuration
+          </h2>
 
           <Composition />
+        </Section>
 
-          <h3>
-            <ClipText>Declarative</ClipText> or Imperative
-          </h3>
+        <Section
+          grid
+          planets={[
+            {
+              height: 1200,
+              width: 1200,
+              right: '25%',
+              bottom: '0%',
+              opacity: '30%',
+              background: planetTwo,
+            },
+          ]}
+        >
+          <h2>
+            <ClipText>Declarative</ClipText> & Imperative
+          </h2>
 
           <Programming />
         </Section>
 
-        <Section grid>
+        <Section style={{ minHeight: '75vh' }}>
           <h2>
-            <ClipText breakline>Table</ClipText> Configurator
+            <ClipText breakline>Table</ClipText> Configurator (Beta)
           </h2>
         </Section>
 

@@ -1,0 +1,40 @@
+.docCode {
+  flex: 1;
+  overflow: auto;
+
+  border: 1px solid var(--theme-ui-colors-border);
+  border-radius: 4px;
+  margin: 1rem;
+  background-color: var(--theme-ui-colors-background);
+
+  @media screen and (max-width: 920px) {
+    padding-top: 0rem;
+    width: 100%;
+    max-width: calc(100vw - 2rem);
+    margin: 1rem 0;
+  }
+
+  &::not(:last-of-type) {
+    padding-right: 1rem;
+  }
+}
+
+.docCodeHeader {
+  font-size: small;
+
+  color: var(--theme-ui-colors-text-light);
+
+  div {
+    display: inline-block;
+    line-height: 2rem;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid var(--theme-ui-colors-border);
+    background-color: var(--theme-ui-colors-background);
+    margin-bottom: -1px;
+  }
+}
+
+.docCodeContent {
+  border-top: 1px solid var(--theme-ui-colors-border);
+  padding: 0 1rem;
+}

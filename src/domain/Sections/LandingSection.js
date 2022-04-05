@@ -8,6 +8,7 @@ import { planetOne, planetTwo } from 'components/Planets';
 
 const LandingSection = () => (
   <Section
+    columnOnMobile
     split
     grid
     planets={[
@@ -31,7 +32,6 @@ const LandingSection = () => (
   >
     <Pane
       style={{
-        width: '60%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -53,7 +53,7 @@ const LandingSection = () => (
         Learn More
       </PrimaryButton>
     </Pane>
-    <Pane style={{ width: '40%' }}>
+    <Pane>
       <p>
         Presented by <strong>react-table-library</strong> with ...
       </p>

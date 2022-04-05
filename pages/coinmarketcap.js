@@ -10,7 +10,7 @@ export default function Coinmarketcap() {
       <Header />
 
       <main>
-        <Section noPaddingOnMobile>
+        <Section>
           <h2 style={{ textAlign: 'center' }}>Coin Market Cap</h2>
 
           <div

@@ -1,12 +1,13 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
+import { DocCode } from 'components/DocCode';
 import { Highlight } from 'components/Highlight';
 
 import styles from '../Composition/Composition.module.scss';
 
 const declarative = `
-// declarative
+// built-in declarative components
 
 <Header>
   <HeaderRow>
@@ -21,7 +22,7 @@ const declarative = `
 `;
 
 const imperative = `
-// imperative
+// exposed imperative methods
 
 <Header>
   <HeaderRow>
@@ -45,12 +46,12 @@ const imperative = `
 const Programming = () => {
   return (
     <div className={clsx(styles.container)}>
-      <div className={clsx(styles.pane)}>
+      <DocCode fileName="declarative.js">
         <Highlight code={declarative} />
-      </div>
-      <div className={clsx(styles.pane)}>
+      </DocCode>
+      <DocCode fileName="imperative.js">
         <Highlight code={imperative} />
-      </div>
+      </DocCode>
     </div>
   );
 };

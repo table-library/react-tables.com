@@ -10,7 +10,7 @@ export default function Asana() {
       <Header />
 
       <main>
-        <Section noPaddingOnMobile>
+        <Section>
           <h3 style={{ textAlign: 'center' }}>Asana</h3>
 
           <div

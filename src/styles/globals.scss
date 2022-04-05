@@ -75,7 +75,7 @@ h2, .h2 {
   letter-spacing: -1.6px;
 
   color: var(--theme-ui-colors-text);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   margin-top: 0rem;
 
   @media screen and (max-width: 480px) {
@@ -176,4 +176,9 @@ a {
 
 .token-line {
   white-space: pre;
+}
+
+pre {
+  margin: 0;
+  padding: 0;
 }
