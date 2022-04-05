@@ -135,6 +135,10 @@ p {
   color: var(--theme-ui-colors-text);
   margin-top: 0rem;
   margin-bottom: 0.5rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
 }
 
 [data-theme='dark'] {
