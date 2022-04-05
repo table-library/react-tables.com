@@ -430,7 +430,7 @@ const AsanaTable = () => {
     <Table
       data={data}
       theme={theme}
-      layout={{ custom: true }}
+      layout={{ custom: true, horizontalScroll: true }}
       sort={sort}
       tree={tree}
     >

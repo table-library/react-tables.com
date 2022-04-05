@@ -26,10 +26,6 @@ export const SHARED_THEME = {
     min-width: 20%;
     width: 20%;
 
-    &:first-of-type {
-      padding-left: 24px;
-    }
-
     &:nth-of-type(1) {
       min-width: 40%;
       width: 40%;
@@ -47,14 +43,6 @@ export const PRIMARY_THEME = {
 
     &:first-of-type {
       padding-left: 24px;
-    }
-
-    min-width: 20%;
-    width: 20%;
-
-    &:nth-of-type(1) {
-      min-width: 40%;
-      width: 40%;
     }
   `,
 };
