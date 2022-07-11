@@ -90,7 +90,6 @@ const CommentTable = ({ data }) => {
 
 const AsanaRow = ({
   item,
-  isFirst,
   upvotes,
   onUpvote,
   expands,
@@ -109,7 +108,7 @@ const AsanaRow = ({
 
   return (
     <>
-      <Row item={item} className={clsx({ first: isFirst })}>
+      <Row item={item}>
         <Cell>
           <AlignCenter spaceBetween>
             <AlignCenter style={{ minWidth: '20px' }}>
@@ -289,12 +288,7 @@ const CategoryTable = ({
         .filter(isCategory(category.key))
         .filter(() => !isCollapsed)
         .map((item, index) => (
-          <AsanaRow
-            key={item.id}
-            item={item}
-            isFirst={index === 0}
-            {...props}
-          />
+          <AsanaRow key={item.id} item={item} {...props} />
         ))}
     </>
   );
@@ -430,7 +424,7 @@ const AsanaTable = () => {
     <Table
       data={data}
       theme={theme}
-      layout={{ custom: true, horizontalScroll: true }}
+      layout={{ custom: true }}
       sort={sort}
       tree={tree}
     >

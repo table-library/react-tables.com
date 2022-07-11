@@ -7,4 +7,6 @@ export const Category = styled.div`
 
   display: flex;
   align-items: center;
+
+  grid-column: 1 / span 4;
 `;

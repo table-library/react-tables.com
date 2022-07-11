@@ -1,19 +1,23 @@
 export const SHARED_THEME = {
+  Table: `
+    --data-table-library_grid-template-columns:  40% repeat(3, minmax(20%, 1fr));
+  `,
   HeaderRow: `
     font-size: 12px;
     color: var(--theme-ui-colors-text);
 
-    border-top: 1px solid var(--theme-ui-colors-border);
-    border-bottom: 1px solid var(--theme-ui-colors-border);
+    .th {
+      border-top: 1px solid var(--theme-ui-colors-border);
+      border-bottom: 1px solid var(--theme-ui-colors-border);
+    }
   `,
   Row: `
     font-size: 14px;
     color: var(--theme-ui-colors-text);
 
-    border-bottom: 1px solid var(--theme-ui-colors-border);
-
-    &.first {
+    .td {
       border-top: 1px solid var(--theme-ui-colors-border);
+      border-bottom: 1px solid var(--theme-ui-colors-border);
     }
 
     &:hover {
@@ -21,15 +25,7 @@ export const SHARED_THEME = {
     }
   `,
   BaseCell: `
-    padding: 16px 0;
-
-    min-width: 20%;
-    width: 20%;
-
-    &:nth-of-type(1) {
-      min-width: 40%;
-      width: 40%;
-    }
+    padding: 16px 16px;
   `,
 };
 
@@ -39,7 +35,10 @@ export const PRIMARY_THEME = {
   `,
   BaseCell: `
     border-bottom: 1px solid transparent;
-    border-right: 1px solid var(--theme-ui-colors-border);
+
+    &:not(:last-of-type) {
+      border-right: 1px solid var(--theme-ui-colors-border);
+    }
 
     &:first-of-type {
       padding-left: 24px;
@@ -48,6 +47,9 @@ export const PRIMARY_THEME = {
 };
 
 export const SECONDARY_THEME = {
+  Table: `
+    display: inherit;
+  `,
   BaseRow: `
     background-color: var(--theme-ui-colors-background-secondary);
   `,
@@ -57,6 +59,7 @@ export const SECONDARY_THEME = {
 
     &:first-of-type {
       padding-left: 48px;
+      grid-column: 1 / span 4;
     }
   `,
 };

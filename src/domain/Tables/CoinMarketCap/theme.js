@@ -11,58 +11,42 @@ export const CUSTOM_SHARED_THEME = ({
   isLightMode,
   isLightModeFinished,
 }) => ({
+  Table: `
+    --data-table-library_grid-template-columns:  80px 80px 240px repeat(6, minmax(20%, 1fr)) 80px;
+  `,
   BaseRow: `
-    height: 54px;
-
     font-size: 14px;
     color: var(--theme-ui-colors-text);
 
     &:hover {
       color: var(--theme-ui-colors-text);
     }
+
+    border-bottom: 1px solid #D4D4D4;
   `,
   HeaderRow: `
     font-size: 12px;
-
     border-top: none;
-    border-bottom: 1px solid var(--theme-ui-colors-border);
   `,
   Row: `
     font-size: 14px;
-
-    border-bottom: 1px solid var(--theme-ui-colors-border);
   `,
   BaseCell: `
-    padding-top: 16px 16px;
-
-    border-top: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
+    height: 54px;
+    padding: 0 16px;
 
     ${disablePin}
 
-    min-width: 20%;
-    width: 20%;
-
     &:nth-of-type(1) {
       left: 0px;
-
-      min-width: 80px;
-      width: 80px;
     }
 
     &:nth-of-type(2) {
       left: 80px;
-
-      min-width: 80px;
-      width: 80px;
     }
 
     &:nth-of-type(3) {
       left: 160px;
-
-      min-width: 240px;
-      width: 240px;
     }
 
     background-color: var(--theme-ui-colors-background-secondary);
@@ -84,16 +68,8 @@ export const CUSTOM_SHARED_THEME = ({
       }
     }
 
-    &.small {
-      min-width: 200px;
-      width: 200px;
-    }
-
     &:last-of-type {
       right: 0;
-
-      min-width: 80px;
-      width: 80px;
 
       ${
         isLightMode
@@ -106,8 +82,11 @@ export const CUSTOM_SHARED_THEME = ({
           : ''
       }
 
-      display: flex;
-      justify-content: center;
+      & > div {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+      }
     }
 
     & .MuiLinearProgress-colorPrimary {
@@ -124,7 +103,7 @@ export const CUSTOM_PRIMARY_THEME = {};
 
 export const CUSTOM_SECONDARY_THEME = {
   Table: `
-    overflow: inherit;
+    display: inherit;
   `,
   BaseRow: `
     background-color: var(--theme-ui-colors-background);

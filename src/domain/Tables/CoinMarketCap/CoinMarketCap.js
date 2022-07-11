@@ -94,7 +94,7 @@ const ViewMarket = ({
   );
 };
 
-const MarketsTable = ({ data, customColumnsActive }) => {
+const MarketsTable = ({ data, hiddenColumns }) => {
   const { isLightMode } = useDarkMode();
 
   const theme = useTheme([
@@ -103,15 +103,7 @@ const MarketsTable = ({ data, customColumnsActive }) => {
   ]);
 
   return (
-    <Table
-      data={data}
-      theme={theme}
-      layout={{
-        custom: true,
-        horizontalScroll: true,
-        inheritLayout: true,
-      }}
-    >
+    <Table data={data} theme={theme}>
       {(tableListSecondary) => (
         <>
           <Header>
@@ -125,8 +117,11 @@ const MarketsTable = ({ data, customColumnsActive }) => {
               <HeaderCell />
               <HeaderCell />
               <HeaderCell />
-              {customColumnsActive.map((column) => (
-                <HeaderCell key={column} className="small" />
+              {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                <HeaderCell
+                  key={column}
+                  hide={hiddenColumns.includes(column)}
+                />
               ))}
               <HeaderCell pinRight />
             </HeaderRow>
@@ -194,8 +189,12 @@ const MarketsTable = ({ data, customColumnsActive }) => {
                   <Cell />
                   <Cell />
                   <Cell />
-                  {customColumnsActive.map((column) => (
-                    <Cell key={column} className="small" />
+                  {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                    <Cell
+                      key={column}
+                      hide={hiddenColumns.includes(column)}
+                      className="small"
+                    />
                   ))}
                   <Cell pinRight />
                 </Row>
@@ -275,8 +274,9 @@ const CoinsTable = () => {
 
   const [isCustomizeActive, setCustomizeActive] =
     React.useState(false);
-  const [customColumnsActive, setCustomColumnsActive] =
-    React.useState([]);
+  const [hiddenColumns, setHiddenColumns] = React.useState(
+    Object.keys(CUSTOM_COLUMNS)
+  );
 
   // theming
 
@@ -499,20 +499,14 @@ const CoinsTable = () => {
                 color="secondary"
                 size="small"
                 variant={
-                  customColumnsActive.includes(key)
-                    ? 'outlined'
-                    : 'text'
+                  hiddenColumns.includes(key) ? 'text' : 'outlined'
                 }
                 onClick={() =>
-                  customColumnsActive.includes(key)
-                    ? setCustomColumnsActive(
-                        customColumnsActive.filter(
-                          (value) => value !== key
-                        )
+                  hiddenColumns.includes(key)
+                    ? setHiddenColumns(
+                        hiddenColumns.filter((value) => value !== key)
                       )
-                    : setCustomColumnsActive(
-                        customColumnsActive.concat(key)
-                      )
+                    : setHiddenColumns(hiddenColumns.concat(key))
                 }
               >
                 {CUSTOM_COLUMNS[key].label}
@@ -521,11 +515,14 @@ const CoinsTable = () => {
           </Stack>
 
           <Stack direction="row" spacing={1} m={1}>
-            {!!customColumnsActive.length && (
+            {hiddenColumns.length <
+              Object.keys(CUSTOM_COLUMNS).length && (
               <Button
                 color="secondary"
                 size="small"
-                onClick={() => setCustomColumnsActive([])}
+                onClick={() =>
+                  setHiddenColumns(Object.keys(CUSTOM_COLUMNS))
+                }
               >
                 Clear Columns
               </Button>
@@ -587,18 +584,28 @@ const CoinsTable = () => {
                   </HeaderCell>
                   <HeaderCell resize>Market Cap</HeaderCell>
                   <HeaderCell resize>Circulating Supply</HeaderCell>
-                  <HeaderCell>Last 7 Days</HeaderCell>
-                  {customColumnsActive.map((column) => (
-                    <HeaderCell key={column} className="small">
+                  <HeaderCell
+                    resize={
+                      hiddenColumns.length !==
+                      Object.keys(CUSTOM_COLUMNS).length
+                    }
+                  >
+                    Last 7 Days
+                  </HeaderCell>
+                  {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                    <HeaderCell
+                      key={column}
+                      resize
+                      hide={hiddenColumns.includes(column)}
+                      className="small"
+                    >
                       <AlignCenter>
                         {CUSTOM_COLUMNS[column].label}&nbsp;
                         <IconButton
                           size="small"
                           onClick={() =>
-                            setCustomColumnsActive(
-                              customColumnsActive.filter(
-                                (value) => value !== column
-                              )
+                            setHiddenColumns(
+                              hiddenColumns.concat(column)
                             )
                           }
                         >
@@ -711,12 +718,16 @@ const CoinsTable = () => {
                             <SparklinesLine color="var(--theme-ui-colors-success)" />
                           </Sparklines>
                         </Cell>
-                        {customColumnsActive.map((column) => (
-                          <Cell key={column} className="small">
+                        {Object.keys(CUSTOM_COLUMNS).map((column) => (
+                          <Cell
+                            key={column}
+                            hide={hiddenColumns.includes(column)}
+                            className="small"
+                          >
                             {CUSTOM_COLUMNS[column].render(item)}
                           </Cell>
                         ))}
-                        <Cell pinRight stiff>
+                        <Cell pinRight>
                           <ViewMarket
                             marketData={marketData}
                             item={item}
@@ -735,7 +746,7 @@ const CoinsTable = () => {
                             data={{
                               nodes: marketData?.data.tickers || [],
                             }}
-                            customColumnsActive={customColumnsActive}
+                            hiddenColumns={hiddenColumns}
                           />
                         )}
                     </React.Fragment>
