@@ -1,6 +1,6 @@
 export const SHARED_THEME = {
   Table: `
-    --data-table-library_grid-template-columns:  40% repeat(3, minmax(20%, 1fr));
+    --data-table-library_grid-template-columns: 40% repeat(3, minmax(20%, 1fr));
   `,
   HeaderRow: `
     font-size: 12px;

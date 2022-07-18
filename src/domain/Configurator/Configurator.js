@@ -305,6 +305,7 @@ const getComponentCode = ({ resize, sort, select, tree }) => {
     <Table
       data={data}
       theme={theme}
+      layout={{ fixedHeader: true }}
   `;
 
   if (sort.enabled) {

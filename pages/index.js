@@ -97,6 +97,20 @@ export default function Home() {
           <Themes />
         </Section>
 
+        <Section>
+          <h2 style={{ textAlign: 'center' }}>Gantt Chart</h2>
+
+          <div
+            style={{
+              width: '90vw',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <TABLES.Gantt />
+          </div>
+        </Section>
+
         <Section grid>
           <h2>
             <ClipText>Composition</ClipText> & Configuration

@@ -401,10 +401,10 @@
   resolved "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.0.8.tgz"
   integrity sha512-ZK5v4bJwgXldAUA8r3q9YKfCwOqoHTK/ZqRjSeRXQrBXWouoPnS4MQtgC4AXGiiBuUu5wxrRgTlv0ktmM4P1Aw==
 
-"@table-library/react-table-library@4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@table-library/react-table-library/-/react-table-library-4.0.6.tgz#7e3bb9f3da02c5843399de1b8d5ec7683be7af58"
-  integrity sha512-/9szR8tDQxzEBtYe+NKUQj0DFUUSS37l17XxYwqU4DUVGH87+FrU7/DDTzxUzdf5BVrtc6Ye3cAIoyslkN9HSw==
+"@table-library/react-table-library@^4.0.10":
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/@table-library/react-table-library/-/react-table-library-4.0.10.tgz#d62329d9bed827cdca385cbb762aede9237b6e02"
+  integrity sha512-BGuByIEGfnup59DPGxxg/d4YlSmHOzy1xIbmd6gKj3iBTNeSTlYOKWTsl3ZkWljjZwvbzMaKPA1brnVJwt0doA==
   dependencies:
     clsx "1.1.1"
     react-virtualized-auto-sizer "1.0.6"
